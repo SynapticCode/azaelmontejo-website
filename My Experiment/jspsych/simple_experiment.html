@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple jsPsych + Phaser Test</title>
+    <script src="https://unpkg.com/jspsych@7.3.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-external-html@1.1.2"></script>
+    <link href="https://unpkg.com/jspsych@7.3.1/css/jspsych.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="jspsych-target"></div>
+<script>
+    const jsPsych = initJsPsych({
+        on_finish: function() {
+            jsPsych.data.displayData();
+        }
+    });
+
+    const phaser_game_trial = {
+        type: jsPsychExternalHtml,
+        url: "exobound_game.html",
+        cont_btn: "none",
+        execute_script: true
+    };
+
+    jsPsych.run([phaser_game_trial]);
+</script>
+</body>
+</html>

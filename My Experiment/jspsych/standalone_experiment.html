@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EXOBOUND Experiment</title>
+  <script src="https://unpkg.com/jspsych@7.3.1"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-external-html@1.1.2"></script>
+  <link href="https://unpkg.com/jspsych@7.3.1/css/jspsych.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<script>
+  // Initialize jsPsych
+  const jsPsych = initJsPsych({
+    on_finish: function() {
+      document.body.innerHTML = `
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; text-align: center; color: #eee; background-color: #1a1a1a;">
+          <div>
+            <h2 style="color: #0ff;">Recovery Protocol Complete</h2>
+            <p>Thank you for your service, Captain. Your mission data has been logged.</p>
+            <p>Your Debriefing Code is: <strong>${jsPsych.randomization.randomID(10)}</strong></p>
+          </div>
+        </div>`;
+    }
+  });
+
+  // Define the Phaser Game Trial
+  const phaser_game_trial = {
+    type: jsPsychExternalHtml,
+    url: "exobound_game.html",
+    cont_btn: null,
+    execute_script: true,
+    data: {
+      trial_type: 'game',
+      team_size: 5,
+      coordination_cost: 0.4
+    }
+  };
+
+  // The Full Experiment Timeline
+  const timeline = [phaser_game_trial];
+
+  // Start the experiment
+  jsPsych.run(timeline);
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phaser Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <style>
+        body { margin: 0; background-color: #1a1a1a; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    </style>
+</head>
+<body>
+<div id="phaser-game"></div>
+<script>
+window.onload = function() {
+    class SimpleScene extends Phaser.Scene {
+        constructor() {
+            super({ key: 'SimpleScene' });
+        }
+
+        create() {
+            this.add.text(400, 300, 'Phaser is working!', { 
+                font: '32px Arial', 
+                fill: '#00ff00' 
+            }).setOrigin(0.5);
+            
+            console.log('Phaser scene created successfully');
+        }
+    }
+
+    const config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        parent: 'phaser-game',
+        scene: [SimpleScene]
+    };
+
+    const game = new Phaser.Game(config);
+};
+</script>
+</body>
+</html>

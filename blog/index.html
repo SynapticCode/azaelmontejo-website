@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Azael Montejo Jr.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .prose p {
+            margin-bottom: 1em;
+        }
+        .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+
+        
+        // Blog Posts Data
+        const blogPosts = [
+            {
+                id: 'thesis-bridge',
+                title: "My Thesis is the Bridge: Why I'm Pursuing Both Computer Science and Civil Justice",
+                date: "July 31, 2025",
+                category: "Education, Social Impact, Personal Journey",
+                excerpt: "The late July air hangs thick and sweet over the Princeton campus, a world I still navigate with a quiet sense of wonder. It's been nine weeks...",
+                externalLink: "posts/my-thesis-is-the-bridge.html"
+            },
+            {
+                id: 'ocean-hero',
+                title: "The Day the Ocean Taught Me What a Hero Really Is",
+                date: "January 2025",
+                category: "Personal Journey, Leadership, Life Lessons",
+                excerpt: "The air over Will Rogers Beach held the sweet, briny scent of salt and the distant thunder of a hurricane that was a thousand miles away, yet its voice was already a roar in our ears. I was a Junior Lifeguard Cadet, a title that carried the weight of a kingdom in my young hands...",
+                externalLink: "posts/the-day-the-ocean-taught-me.html"
+            },
+            {
+                id: 'professor-project',
+                title: "The Day I Collaborated on My Professor's Passion Project",
+                date: "July 31, 2025",
+                category: "Research, Collaboration, Mentorship",
+                excerpt: "The Princeton campus, with its hushed Gothic spires and centuries of ingrained intellect, has been my world for nine weeks now...",
+                externalLink: "posts/professor-passion-project.html"
+            },
+        ];
+
+        // Header Component
+        const Header = () => {
+            return (
+                <header className="bg-white shadow-md py-4 rounded-b-lg">
+                    <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+                        <a href="https://azaelmontejo.com" className="text-2xl font-bold text-gray-800 rounded-lg p-2 hover:bg-gray-100 transition duration-300">Azael Montejo Jr.</a>
+                        <nav className="mt-4 md:mt-0">
+                            <ul className="flex flex-wrap justify-center space-x-4 md:space-x-8">
+                                <li><a href="https://azaelmontejo.com" className="text-gray-600 hover:text-blue-600 font-medium rounded-lg p-2 transition duration-300">Home</a></li>
+                                <li><a href="https://azaelmontejo.com/EXOBOUND/" className="text-gray-600 hover:text-blue-600 font-medium rounded-lg p-2 transition duration-300">EXOBOUND</a></li>
+                                <li><a href="https://azaelmontejo.com/Portfolio/" className="text-gray-600 hover:text-blue-600 font-medium rounded-lg p-2 transition duration-300">Portfolio</a></li>
+                                <li><a href="https://azaelmontejo.com/connect" className="text-gray-600 hover:text-blue-600 font-medium rounded-lg p-2 transition duration-300">Connect</a></li>
+                                <li><a href="#" className="text-blue-600 font-bold rounded-lg p-2 bg-blue-50 hover:bg-blue-100 transition duration-300">Blog</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+            );
+        };
+
+        // Blog Post Card Component
+        const BlogPostCard = ({ title, date, category, excerpt, externalLink }) => {
+            return (
+                <article className="bg-white rounded-xl shadow-lg p-6 mb-8 transition transform duration-200 hover:scale-[1.01] hover:shadow-xl">
+                    <h2 className="text-3xl font-semibold text-gray-900 mb-3">{title}</h2>
+                    <p className="text-sm text-gray-500 mb-4">{date} | {category}</p>
+                    <p className="text-gray-700 leading-relaxed mb-6">{excerpt}</p>
+                    <a
+                        href={externalLink}
+                        className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md py-1 px-2"
+                    >
+                        Read More
+                        <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </article>
+            );
+        };
+
+
+
+        // Footer Component
+        const Footer = () => {
+            return (
+                <footer className="bg-gray-800 text-white py-8 mt-12 rounded-t-lg">
+                    <div className="container mx-auto px-4 text-center">
+                        <p className="text-gray-300">&copy; {new Date().getFullYear()} Azael Montejo Jr. All rights reserved.</p>
+                        <div className="flex justify-center space-x-6 mt-4">
+                            <a href="https://www.linkedin.com/in/azael-montejo-jr" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">LinkedIn</a>
+                            <a href="https://www.instagram.com/azaelmontejojr" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition duration-300">Instagram</a>
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        // Main App Component with sorting (following instructions.md)
+        const App = () => {
+            return (
+                <div className="min-h-screen bg-gray-50 flex flex-col">
+                    <Header />
+
+                    <main className="container mx-auto px-4 py-12 flex-grow">
+                        <h1 className="text-5xl font-extrabold text-center mb-12 text-gray-900 leading-tight">My Latest Insights</h1>
+                        {blogPosts
+                            .slice()
+                            .sort((a, b) => new Date(b.date) - new Date(a.date))
+                            .map(post => (
+                                <BlogPostCard
+                                    key={post.id}
+                                    title={post.title}
+                                    date={post.date}
+                                    category={post.category}
+                                    excerpt={post.excerpt}
+                                    externalLink={post.externalLink}
+                                />
+                            ))}
+                    </main>
+
+                    <Footer />
+                </div>
+            );
+        };
+
+        const rootElement = document.getElementById('root');
+        if (rootElement) {
+            ReactDOM.createRoot(rootElement).render(<App />);
+        } else {
+            console.error('Root element not found. Please ensure an element with id="root" exists in your HTML.');
+        }
+    </script>
+</body>
+</html>

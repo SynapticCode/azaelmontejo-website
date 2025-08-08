@@ -1,0 +1,22 @@
+.jspsych-content {
+    max-width: 800px;
+    margin: auto;
+}
+
+.jspsych-display-element {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.jspsych-top {
+    align-items: flex-start;
+}
+
+.jspsych-middle {
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 auto;
+}

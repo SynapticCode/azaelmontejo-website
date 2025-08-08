@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXOBOUND Research - Azael Montejo Jr.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" xintegrity="sha384-n8MVd4RsNIU0KOVEMckDMOe6bv2B6g6Ie3P5yPut2N5aXkECIlQPO4APqrllV5tG" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" xintegrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" xintegrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0f26;
+            color: #f0f0f0;
+        }
+        .princeton-orange { color: #F58426; }
+        .electric-blue { color: #0066CC; }
+        .exo-blue { color: #66ccff; }
+        .cosmic-indigo { color: #8b5cf6; }
+        .section-glow { box-shadow: 0 0 40px -10px rgba(0, 102, 204, 0.3); }
+        .tab-active { 
+            background: linear-gradient(90deg, #66ccff, #ff9900);
+            color: #0c0c1a;
+            font-weight: 700;
+            text-shadow: none;
+            border: 1px solid #66ccff;
+        }
+        .tab-inactive { 
+            background: rgba(102, 204, 255, 0.1);
+            color: #66ccff;
+            border: 1px solid rgba(102, 204, 255, 0.3);
+            opacity: 0.7;
+        }
+        .tab-inactive:hover {
+            opacity: 1;
+            background: rgba(102, 204, 255, 0.2);
+        }
+        .exobound-title {
+            font-family: 'Orbitron', 'Arial', sans-serif;
+        }
+        .btn-ecosystem {
+            color: #ff9900;
+            font-size: 16px;
+            border: 1px solid #ff9900;
+            padding: 15px 30px;
+            border-radius: 25px;
+            background: rgba(255, 153, 0, 0.1);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            animation: pulse 1.5s infinite;
+        }
+        .btn-ecosystem:hover {
+            background: rgba(255, 153, 0, 0.2);
+            transform: translateY(-2px);
+        }
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 153, 0, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 153, 0, 0);
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-900/95 backdrop-blur-sm z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center h-16">
+                <a href="../index.html" class="text-2xl font-bold cosmic-indigo">AMJ</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html#about" class="hover:cosmic-indigo transition-colors">About</a>
+                    <a href="../index.html#pillars" class="hover:cosmic-indigo transition-colors">Pillars</a>
+                    <a href="../index.html#insights" class="hover:cosmic-indigo transition-colors">Insights</a>
+                    <a href="../index.html#ecosystem" class="hover:cosmic-indigo transition-colors">Connect</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-white" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden fixed top-16 w-full bg-gray-900/95 backdrop-blur-sm z-40 border-b border-gray-800 hidden">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex flex-col space-y-4">
+                <a href="../index.html#about" class="hover:cosmic-indigo transition-colors">About</a>
+                <a href="../index.html#pillars" class="hover:cosmic-indigo transition-colors">Pillars</a>
+                <a href="../index.html#insights" class="hover:cosmic-indigo transition-colors">Insights</a>
+                <a href="../index.html#ecosystem" class="hover:cosmic-indigo transition-colors">Connect</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="py-20 md:py-24 text-center">
+        <div class="container mx-auto px-6">
+            <h1 class="exobound-title" style="color: #66ccff; font-size: clamp(32px, 8vw, 56px); text-shadow: 0 0 20px rgba(102, 204, 255, 0.8), 0 0 40px rgba(102, 204, 255, 0.4); margin-bottom: 10px; letter-spacing: 3px;">EXOBOUND</h1>
+            <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mt-4">
+                An interactive research experiment transforming abstract theory into intuitive, tactical gameplay.
+            </p>
+        </div>
+    </section>
+
+    <!-- THE "WHAT" -->
+    <section class="py-20 md:py-24 bg-black bg-opacity-20">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div class="text-left">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4"><span class="princeton-orange">What is</span> <span class="exobound-title exo-blue">EXOBOUND</span>?</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        <span class="exobound-title exo-blue font-semibold">EXOBOUND</span> is an interactive research experiment disguised as a tactical fleet command game. It transforms a dense mathematical study on organizational decision-making into an engaging, high-stakes narrative.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        Players command a starship fleet, facing a fundamental conflict: follow standard protocol (target asteroids) or adapt to new threats (target enemy raiders).
+                    </p>
+                    <p class="text-gray-300 leading-relaxed">
+                        This gamified approach preserves the complete scientific rigor of the original study while making the science more accessible and intuitive, leading to better, more robust data.
+                    </p>
+                </div>
+                <div>
+                    <img src="assets/exobound-cockpit.png" 
+                         alt="Screenshot of the EXOBOUND game cockpit" 
+                         class="rounded-xl shadow-2xl w-full h-auto section-glow"
+                         onerror="this.onerror=null;this.src='https://placehold.co/600x400/0d0f26/FFFFFF?text=EXOBOUND+Cockpit';">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE "WHY" -->
+    <section class="py-20 md:py-24">
+        <div class="container mx-auto px-6 max-w-5xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12">Grounded in Theory, <span class="electric-blue">Built for Discovery.</span></h2>
+            <div id="tabs-container" class="w-full max-w-4xl mx-auto">
+                <div class="flex justify-center space-x-2 md:space-x-4 mb-8 rounded-lg p-2 bg-gray-800 bg-opacity-50">
+                    <button data-tab="conflict" class="tab-btn tab-active flex-1 py-3 px-4 rounded-md font-semibold transition-all duration-300">The Core Conflict</button>
+                    <button data-tab="model" class="tab-btn tab-inactive flex-1 py-3 px-4 rounded-md font-semibold transition-all duration-300">The Mathematical Model</button>
+                </div>
+                <div class="text-left">
+                    <div id="conflict" class="tab-content">
+                        <div class="bg-gray-900 bg-opacity-50 p-8 rounded-lg">
+                            <p class="text-lg text-gray-300 leading-relaxed">
+                                This research is grounded in the classic 'coordination-adaptation tradeoff' from organizational theory. Every team faces this conflict: should an individual adapt to new local information, or coordinate with the team by sticking to a shared plan, especially when communication is unreliable and attention is scarce?
+                            </p>
+                        </div>
+                    </div>
+                    <div id="model" class="tab-content hidden">
+                        <div class="bg-gray-900 bg-opacity-50 p-8 rounded-lg text-center">
+                            <div class="text-sm md:text-base lg:text-lg text-white my-4 p-4 bg-gray-800 rounded-md overflow-x-auto">
+                                $$Total Loss = \alpha(Action - \theta_{ideal})^2 + (1-\alpha)(Action - \theta_{standard})^2$$
+                            </div>
+                            <p class="text-lg text-gray-300 leading-relaxed mt-6">
+                                The game's scoring system is built on this elegant loss function. It mathematically models the tension between <strong class="font-semibold text-princeton-orange">Adaptation Loss</strong> and <strong class="font-semibold text-electric-blue">Coordination Loss</strong>. This proves that <span class="exobound-title exo-blue font-semibold">EXOBOUND</span> is a scientifically valid research instrument, not just a game.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: THE "WHO" (REWRITTEN) -->
+    <section class="py-20 md:py-24 bg-black bg-opacity-20">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">The Power of a <span class="princeton-orange">Non-Traditional Path</span></h2>
+            <div class="space-y-10">
+                <div>
+                    <h3 class="font-bold text-2xl text-electric-blue mb-3">The Grind: Investing in Human Potential</h3>
+                    <p class="text-gray-300 leading-relaxed">Before I was a researcher, I was an entrepreneur obsessed with helping people improve their lives. From promoting music events to building a data-driven fitness coaching business, I spent years investing my own time and resources to translate human ambition into real-world results. I learned how powerful—and frustrating—technology can be, and I learned that building systems for others means nothing if your own is broken.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-2xl text-electric-blue mb-3">The Catalyst: An Architected Reconstruction</h3>
+                    <p class="text-gray-300 leading-relaxed">My own system collapsed, and incarceration became the ultimate catalyst. It was there, stripped of everything, that I had to architect my own reconstruction. I discovered a new mission in education, earning an Associate's degree with a 4.0 GPA and proving to myself that my past would not define my future.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-2xl text-electric-blue mb-3">The Crucible: Isolation and Breakthrough at Princeton</h3>
+                    <p class="text-gray-300 leading-relaxed">Arriving at Princeton was not a simple victory. I was an outsider, navigating an elite world less than six months after release, and the weight of stigma and my own self-doubt was immense. Faced with what felt like constant rejection, I retreated into the one coping mechanism I knew: isolation and relentless work. The project's heavy foundation in abstract math and computer science felt like an insurmountable wall. I was struggling, and I refused to fail.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-2xl text-electric-blue mb-3">The Breakthrough: The Struggle IS the Method</h3>
+                    <p class="text-gray-300 leading-relaxed">My breakthrough came when I realized my struggle was a real-world test of the very theory I was studying. I had to choose: coordinate with a traditional academic path I hadn't mastered, or adapt and innovate using the project management skills and grit I had. I chose to adapt. My process—running sprints, integrating modern tools, and relying on the lifeline support of my mentors—transformed the experiment. <span class="exobound-title exo-blue font-semibold">EXOBOUND</span> is the result of that choice. It exists because my non-traditional path was not a liability; it was the unique asset needed to make the science feel human.</p>
+                </div>
+            </div>
+            <div class="text-center mt-16 border-t-2 border-princeton-orange border-opacity-50 pt-12">
+                 <p class="text-2xl md:text-3xl italic text-white font-light max-w-4xl mx-auto">"A person's potential is always more powerful than their past."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COLLABORATION SECTION -->
+    <section class="py-20 md:py-24">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Let's Collaborate and <span class="electric-blue">Connect.</span></h2>
+            <p class="text-gray-300 max-w-xl mx-auto mb-10">My work is centered on collaboration. If my mission resonates with you, I invite you to connect.</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="https://www.linkedin.com/in/azaelmontejojr/" target="_blank" rel="noopener noreferrer" class="btn-ecosystem w-full sm:w-auto">
+                    <i class="fab fa-linkedin text-xl"></i>
+                    Connect on LinkedIn
+                </a>
+                <button onclick="openContactModal()" class="btn-ecosystem w-full sm:w-auto border-none">
+                    <i class="fas fa-envelope text-xl"></i>
+                    Contact Me
+                </button>
+                <a href="https://www.instagram.com/azael.montejo.jr/" target="_blank" rel="noopener noreferrer" class="btn-ecosystem w-full sm:w-auto">
+                    <i class="fab fa-instagram text-xl"></i>
+                    Follow on Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black bg-opacity-30 text-gray-400 text-center py-12">
+        <div class="container mx-auto px-6">
+            <p class="text-sm">&copy; 2025 Azael Montejo Jr.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabsContainer = document.getElementById('tabs-container');
+            if(tabsContainer) {
+                const tabButtons = tabsContainer.querySelectorAll('.tab-btn');
+                const tabContents = tabsContainer.querySelectorAll('.tab-content');
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.dataset.tab;
+                        tabButtons.forEach(btn => {
+                            btn.classList.remove('tab-active');
+                            btn.classList.add('tab-inactive');
+                        });
+                        button.classList.add('tab-active');
+                        button.classList.remove('tab-inactive');
+                        tabContents.forEach(content => {
+                            content.id === tabName ? content.classList.remove('hidden') : content.classList.add('hidden');
+                        });
+                        if(tabName === 'model') {
+                            renderMathInElement(document.getElementById('model'));
+                        }
+                    });
+                });
+            }
+        });
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>

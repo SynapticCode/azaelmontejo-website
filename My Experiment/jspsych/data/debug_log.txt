@@ -1,0 +1,3 @@
+2025-06-20 05:34:59 - Script accessed
+2025-06-20 05:34:59 - Raw data: {"filename":"2mvk4184ap.csv","filedata":"\"rt\",\"stimulus\",\"response\",\"trial_type\",\"trial_ind...
+2025-06-20 05:34:59 - Successfully wrote 1028 bytes to data/2mvk4184ap.csv

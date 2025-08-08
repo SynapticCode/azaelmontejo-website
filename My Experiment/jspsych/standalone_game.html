@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EXOBOUND - Standalone Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <style>
+        body { margin: 0; background-color: #1a1a1a; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        canvas { box-shadow: 0 0 20px #0ff; border: 2px solid #0ff; }
+    </style>
+</head>
+<body>
+<div id="phaser-game"></div>
+<script>
+console.log("Game loading...");
+
+// This ensures the game code only runs after the entire page, including Phaser, is loaded.
+window.onload = function() {
+    console.log("Window loaded, initializing game");
+
+    class GameScene extends Phaser.Scene {
+        constructor() {
+            super({ key: 'GameScene' });
+        }
+
+        create() {
+            console.log("GameScene created");
+            
+            // --- World and Text Setup ---
+            this.add.rectangle(400, 300, 800, 600, 0x0a0a0a).setStrokeStyle(2, 0x00ffff);
+            this.add.text(400, 50, 'STANDALONE TEST', { font: '24px monospace', fill: '#00ffff' }).setOrigin(0.5);
+
+            // --- Decision Terminals ---
+            const coordinateZone = this.add.zone(150, 300, 100, 100);
+            this.physics.world.enable(coordinateZone);
+            this.add.rectangle(150, 300, 100, 100, 0x003333).setStrokeStyle(2, 0x00ff00);
+            this.add.text(150, 300, 'COORDINATE', { font: '14px monospace', fill: '#00ff00' }).setOrigin(0.5);
+
+            const adaptZone = this.add.zone(650, 300, 100, 100);
+            this.physics.world.enable(adaptZone);
+            this.add.rectangle(650, 300, 100, 100, 0x330000).setStrokeStyle(2, 0xff0000);
+            this.add.text(650, 300, 'ADAPT', { font: '14px monospace', fill: '#ff0000' }).setOrigin(0.5);
+
+            // --- Player Character ---
+            this.player = this.add.rectangle(400, 500, 30, 30, 0x00ffff);
+            this.physics.add.existing(this.player);
+            this.player.body.setCollideWorldBounds(true);
+
+            // --- Controls ---
+            this.cursors = this.input.keyboard.createCursorKeys();
+
+            // --- Physics Overlaps for Decisions ---
+            this.physics.add.overlap(this.player, coordinateZone, () => {
+                this.endMission('coordinate');
+            }, null, this);
+
+            this.physics.add.overlap(this.player, adaptZone, () => {
+                this.endMission('adapt');
+            }, null, this);
+        }
+
+        // --- A helper function to prevent multiple triggers ---
+        endMission(decision) {
+            if (!this.missionEnded) {
+                console.log("endMission called with decision:", decision);
+                this.missionEnded = true; // Set a flag so this can't run twice
+                this.physics.pause();
+                this.cameras.main.fadeOut(2000, 0, 0, 0); // Fade the screen to black
+                this.add.text(400, 550, `DECISION: ${decision.toUpperCase()}. LOGGING DATA...`, { font: '16px monospace', fill: decision === 'coordinate' ? '#00ff00' : '#ff0000' }).setOrigin(0.5);
+                setTimeout(() => {
+                    alert("Game completed with decision: " + decision);
+                }, 2000);
+            }
+        }
+
+        update() {
+            if (this.missionEnded) return; // Stop player movement after decision
+
+            this.player.body.setVelocity(0);
+            if (this.cursors.left.isDown) { this.player.body.setVelocityX(-200); }
+            else if (this.cursors.right.isDown) { this.player.body.setVelocityX(200); }
+            if (this.cursors.up.isDown) { this.player.body.setVelocityY(-200); }
+            else if (this.cursors.down.isDown) { this.player.body.setVelocityY(200); }
+        }
+    }
+
+    // --- Game Configuration ---
+    const config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        parent: 'phaser-game',
+        physics: {
+            default: 'arcade',
+            arcade: { gravity: { y: 0 } }
+        },
+        scene: [GameScene]
+    };
+
+    try {
+        console.log("Creating Phaser game");
+        const game = new Phaser.Game(config);
+        console.log("Phaser game created successfully");
+    } catch (error) {
+        console.error("Error creating Phaser game:", error);
+    }
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+body {
+    background-color: #000005;
+    color: #e0e0e0;
+    font-family: 'Poppins', 'Inter', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', 'Poppins', sans-serif;
+    color: #f3f3f3;
+}
+.blog-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #181a28;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    padding: 2.5rem;
+}
+nav {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+}
+nav a {
+    color: #4F00BC;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+nav a:hover {
+    color: #ff7f0e;
+    text-decoration: underline;
+}
+.section-title {
+    color: #ff7f0e;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 2rem;
+}
+.code-block {
+    background: #23243a;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: monospace;
+    font-size: 0.97em;
+    color: #fff;
+}
+pre, code {
+    background: #23243a;
+    border-radius: 0.375rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.95em;
+    color: #fff;
+} 

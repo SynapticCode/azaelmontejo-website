@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Fitness Questionnaire</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- EmailJS for form submission -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8; /* A warm, off-white like parchment */
+            color: #3D352E; /* A deep, earthy brown for text */
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #C0A080; /* A soft, warm gold */
+            box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3);
+        }
+        input:focus {
+            outline: none;
+            border-color: #C0A080;
+            box-shadow: 0 0 0 3px rgba(192, 160, 128, 0.3);
+        }
+        .art-accent {
+            position: fixed;
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: radial-gradient(circle, rgba(217, 187, 155, 0.2) 0%, rgba(217, 187, 155, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Loading and success states */
+        .btn-loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        .success-message {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .error-message {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 relative overflow-x-hidden">
+    <!-- Decorative background element -->
+    <div class="art-accent"></div>
+    <main class="w-full max-w-3xl z-10">
+        <!-- Section 1: Introduction -->
+        <div id="intro" class="bg-white/80 backdrop-blur-sm p-8 sm:p-10 rounded-xl shadow-lg border border-gray-200/50 fade-in">
+            <h1 class="text-3xl sm:text-4xl font-light text-[#3D352E] mb-4">A Prelude to Your Transformation</h1>
+            <p class="text-base text-gray-600 mb-6 leading-relaxed">
+                Welcome to your fitness journey questionnaire. This is more than a form; it is the beginning of a collaborative dialogue. Think of it as the foundational sketch for the masterpiece that is your well-being. Your thoughts and reflections are the most crucial element in crafting a fitness program that is not only effective but deeply resonant with who you are and all you aspire to achieve.
+            </p>
+            <p class="text-base text-gray-600 mb-8 leading-relaxed">
+                Please take your time with these questions. There are no right or wrong answers, only your unique perspective. The more insight you share, the more tailored and transformative your journey will be. This is an investment in yourself, and it will allow me to create the most supportive and impactful program for you.
+            </p>
+            <button id="agree-button" class="w-full sm:w-auto bg-[#3D352E] text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-[#5a4d41] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#C0A080] transition-all duration-300">
+                I'm ready to begin
+            </button>
+        </div>
+        
+        <!-- Section 2: Questionnaire Form -->
+        <div id="questionnaire" class="hidden">
+            <form id="client-form" onsubmit="submitClientForm(event)" class="space-y-12 bg-white/80 backdrop-blur-sm p-8 sm:p-10 rounded-xl shadow-lg border border-gray-200/50 fade-in">
+                <!-- Status Messages -->
+                <div id="status-message" class="hidden"></div>
+                
+                <!-- Client Information -->
+                <fieldset>
+                    <legend class="text-2xl sm:text-3xl font-light text-[#3D352E] border-b-2 border-[#C0A080]/50 pb-3 mb-6 w-full">Your Information</legend>
+                    <div class="mb-8">
+                        <label for="client-name" class="block text-lg font-semibold text-gray-700 mb-3">Your Full Name *</label>
+                        <input type="text" id="client-name" name="client_name" required class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50/50 transition-colors duration-300 focus:border-[#C0A080] focus:bg-white" placeholder="Enter your full name">
+                    </div>
+                </fieldset>
+                
+                <!-- Part 1: Core Identity & Aspirations -->
+                <fieldset>
+                    <legend class="text-2xl sm:text-3xl font-light text-[#3D352E] border-b-2 border-[#C0A080]/50 pb-3 mb-6 w-full">Part I: The Core Narrative</legend>
+                    <div class="mb-8">
+                        <label for="q1" class="block text-lg font-semibold text-gray-700 mb-3">Envisioning Your Masterpiece</label>
+                        <p class="text-sm text-gray-500 mb-3">What does "peak performance" look and feel like in your world? How will this new level of physical vitality enrich your creative and professional life?</p>
+                        <textarea id="q1" name="envisioning_masterpiece" rows="6" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50/50 transition-colors duration-300 focus:border-[#C0A080] focus:bg-white" required placeholder="Share your vision for peak performance..."></textarea>
+                    </div>
+                    <div class="mb-8">
+                        <label for="q2" class="block text-lg font-semibold text-gray-700 mb-3">Building a Resilient Life</label>
+                        <p class="text-sm text-gray-500 mb-3">In what ways do you envision your body becoming a source of resilience and adaptability? Think about the unique demands of your life.</p>
+                        <textarea id="q2" name="building_resilient_life" rows="6" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50/50 transition-colors duration-300 focus:border-[#C0A080] focus:bg-white" required placeholder="Describe how resilience fits into your life..."></textarea>
+                    </div>
+                    <div>
+                        <label for="q3" class="block text-lg font-semibold text-gray-700 mb-3">The Joy of Movement</label>
+                        <p class="text-sm text-gray-500 mb-3">What activities genuinely bring you joy and a sense of accomplishment? What aspects of training do you find most engaging, and what might feel tedious?</p>
+                        <textarea id="q3" name="joy_of_movement" rows="6" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50/50 transition-colors duration-300 focus:border-[#C0A080] focus:bg-white" required placeholder="Share what brings you joy in movement..."></textarea>
+                    </div>
+                </fieldset>
+                
+                <!-- Part 2: The Journey So Far -->
+                <fieldset>
+                    <legend class="text-2xl sm:text-3xl font-light text-[#3D352E] border-b-2 border-[#C0A080]/50 pb-3 mb-6 w-full">Part II: The Journey So Far</legend>
+                    <div class="mb-8">
+                        <label for="q4" class="block text-lg font-semibold text-gray-700 mb-3">Unwritten Chapters</label>
+                        <p class="text-sm text-gray-500 mb-3">Reflecting on your past fitness experiences, what was working exceptionally well for you? What discoveries did you make about your body, your mindset, or your preferences?</p>
+                        <textarea id="q4" name="unwritten_chapters" rows="6" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50/50 transition-colors duration-300 focus:border-[#C0A080] focus:bg-white" required placeholder="Reflect on your past fitness experiences..."></textarea>
+                    </div>
+                    <div class="mb-8">
+                        <label for="q5" class="block text-lg font-semibold text-gray-700 mb-3">The Next Horizon</label>
+                        <p class="text-sm text-gray-500 mb-3">As you look toward new physical challenges, what are your greatest excitements? And perhaps, what are your subtle apprehensions?</p>
+                        <textarea id="q5" name="next_horizon" rows="6" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50/50 transition-colors duration-300 focus:border-[#C0A080] focus:bg-white" required placeholder="Share your excitement and concerns about new challenges..."></textarea>
+                    </div>
+                    <div>
+                        <label for="q6" class="block text-lg font-semibold text-gray-700 mb-3">Sustaining Momentum</label>
+                        <p class="text-sm text-gray-500 mb-3">What practical strategies or support systems help you maintain consistency, especially amidst a busy schedule?</p>
+                        <textarea id="q6" name="sustaining_momentum" rows="6" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50/50 transition-colors duration-300 focus:border-[#C0A080] focus:bg-white" required placeholder="Describe your strategies for maintaining consistency..."></textarea>
+                    </div>
+                </fieldset>
+                
+                <!-- Part 3: The Ideal Experience -->
+                <fieldset>
+                    <legend class="text-2xl sm:text-3xl font-light text-[#3D352E] border-b-2 border-[#C0A080]/50 pb-3 mb-6 w-full">Part III: The Ideal Experience</legend>
+                    <div class="mb-8">
+                        <label for="q7" class="block text-lg font-semibold text-gray-700 mb-3">Your Communication Cadence</label>
+                        <p class="text-sm text-gray-500 mb-3">How do you best absorb new information and receive feedback? What style of communication feels most supportive and empowering to you?</p>
+                        <textarea id="q7" name="communication_cadence" rows="6" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50/50 transition-colors duration-300 focus:border-[#C0A080] focus:bg-white" required placeholder="Describe your preferred communication style..."></textarea>
+                    </div>
+                    <div class="mb-8">
+                        <label for="q8" class="block text-lg font-semibold text-gray-700 mb-3">The Proof in the Progress</label>
+                        <p class="text-sm text-gray-500 mb-3">What kinds of progress tracking—beyond numbers—truly motivate you? Is it feeling subtle shifts in how you move, noticing changes in strength, achieving new personal milestones?</p>
+                        <textarea id="q8" name="proof_in_progress" rows="6" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50/50 transition-colors duration-300 focus:border-[#C0A080] focus:bg-white" required placeholder="Share what motivates you beyond numbers..."></textarea>
+                    </div>
+                    <div>
+                        <label for="q9" class="block text-lg font-semibold text-gray-700 mb-3">Your Story</label>
+                        <p class="text-sm text-gray-500 mb-3">Imagine, months from now, a friend asks about this journey. What story of transformation would you enthusiastically share?</p>
+                        <textarea id="q9" name="your_story" rows="6" class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50/50 transition-colors duration-300 focus:border-[#C0A080] focus:bg-white" required placeholder="Share the story you hope to tell..."></textarea>
+                    </div>
+                </fieldset>
+                
+                <button type="submit" id="submit-btn" class="w-full sm:w-auto bg-[#3D352E] text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-[#5a4d41] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#C0A080] transition-all duration-300">
+                    Submit Your Reflections
+                </button>
+            </form>
+        </div>
+        
+        <!-- Section 3: Thank You Message -->
+        <div id="thank-you" class="hidden">
+            <div class="bg-white/80 backdrop-blur-sm p-8 sm:p-12 rounded-xl shadow-lg border border-gray-200/50 text-center fade-in">
+                <h1 class="text-3xl sm:text-4xl font-light text-[#3D352E] mb-4">Thank You</h1>
+                <p class="text-base text-gray-600 mb-2 leading-relaxed">
+                    Thank you for your thoughtful and valuable reflections. Your answers have been securely sent to Azael.
+                </p>
+                <p class="text-base text-gray-600 leading-relaxed">
+                    These insights are the cornerstone of the personalized program we will build together. I am truly excited to begin this journey with you.
+                </p>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Initialize EmailJS (same as your connect page)
+        (function(){
+            emailjs.init("VKr4CXJi8MkzaweC4");
+        })();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const introSection = document.getElementById('intro');
+            const questionnaireSection = document.getElementById('questionnaire');
+            const thankYouSection = document.getElementById('thank-you');
+            const agreeButton = document.getElementById('agree-button');
+
+            // Event listener for the "Agree" button
+            agreeButton.addEventListener('click', () => {
+                introSection.classList.add('hidden');
+                questionnaireSection.classList.remove('hidden');
+                window.scrollTo(0, 0); // Scroll to top
+            });
+        });
+
+        function submitClientForm(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const statusMessage = document.getElementById('status-message');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            submitBtn.classList.add('btn-loading');
+            
+            // Hide any previous status messages
+            statusMessage.classList.add('hidden');
+            
+            const formData = new FormData(event.target);
+            
+            // Format submission time
+            const submissionTime = new Date().toLocaleString('en-US', { 
+                timeZone: 'America/New_York',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            }) + ' Eastern Time';
+            
+            // Use the new template format
+            const templateParams = {
+                client_name: formData.get('client_name'),
+                submission_time: submissionTime,
+                envisioning_masterpiece: formData.get('envisioning_masterpiece'),
+                building_resilient_life: formData.get('building_resilient_life'),
+                joy_of_movement: formData.get('joy_of_movement'),
+                unwritten_chapters: formData.get('unwritten_chapters'),
+                next_horizon: formData.get('next_horizon'),
+                sustaining_momentum: formData.get('sustaining_momentum'),
+                communication_cadence: formData.get('communication_cadence'),
+                proof_in_progress: formData.get('proof_in_progress'),
+                your_story: formData.get('your_story')
+            };
+            
+            // Send email using EmailJS (new service for client questionnaires)
+            emailjs.send('service_82rjmql', 'template_t6fxler', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    
+                    // Show success message
+                    statusMessage.innerHTML = '<div class="success-message">✓ Your reflections have been successfully sent to Azael. Thank you!</div>';
+                    statusMessage.classList.remove('hidden');
+                    
+                    // Reset form
+                    event.target.reset();
+                    
+                    // Show thank you section after a brief delay
+                    setTimeout(() => {
+                        document.getElementById('questionnaire').classList.add('hidden');
+                        document.getElementById('thank-you').classList.remove('hidden');
+                    }, 2000);
+                    
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    
+                    // Show error message
+                    statusMessage.innerHTML = '<div class="error-message">✗ There was an error sending your responses. Please try again or contact Azael directly.</div>';
+                    statusMessage.classList.remove('hidden');
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('btn-loading');
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azael Montejo Jr. | 3D Transformation Constellation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000005;
+            color: #e6e6e6;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        #graph-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: grab;
+        }
+        #graph-container:active {
+            cursor: grabbing;
+        }
+        .info-panel {
+            position: fixed;
+            top: 80px;
+            right: -450px;
+            width: 420px;
+            max-height: calc(100vh - 100px);
+            background: rgba(15, 20, 30, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-left: 1px solid rgba(255, 127, 14, 0.5);
+            border-top: 1px solid rgba(255, 127, 14, 0.5);
+            border-bottom: 1px solid rgba(255, 127, 14, 0.5);
+            border-radius: 10px 0 0 10px;
+            transition: right 0.5s ease-in-out;
+            z-index: 100;
+            padding: 25px;
+            overflow-y: auto;
+        }
+        .info-panel.visible {
+            right: 0;
+        }
+        .node-label {
+            color: #fff;
+            background: rgba(0,0,0,0.6);
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 14px;
+            pointer-events: none;
+            text-shadow: 0 0 5px #000;
+            transition: opacity 0.3s;
+        }
+        .topic-label { font-size: 18px; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div id="graph-container"></div>
+
+    <header class="fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center" style="background: rgba(0, 0, 5, 0.5); backdrop-filter: blur(5px);">
+            <a href="#" class="text-xl font-bold text-white tracking-tighter">AZAEL MONTEJO JR. / SPIRIT CONSTELLATION</a>
+        </div>
+    </header>
+
+    <div id="info-panel" class="info-panel">
+        <h2 id="info-title" class="text-2xl font-bold text-white mb-2">Select a Node</h2>
+        <p id="info-category" class="font-semibold uppercase text-sm mb-4"></p>
+        <div id="info-content" class="text-gray-300 prose prose-invert max-w-none prose-p:text-gray-300">
+            <p>Click on any node to explore the topic and see its connections.</p>
+        </div>
+    </div>
+    
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+
+        // --- DATA STRUCTURE & FOX SHAPE DEFINITION ---
+        const foxShapeCoordinates = [
+            {x: 0, y: 50, z: 0}, {x: -20, y: 70, z: 20}, {x: 20, y: 70, z: 20}, {x: 0, y: 90, z: 10},
+            {x: -30, y: 60, z: -10}, {x: 30, y: 60, z: -10}, {x: 0, y: 55, z: -20},
+            {x: 0, y: 0, z: 0}, {x: -40, y: 20, z: 30}, {x: 40, y: 20, z: 30}, {x: -50, y: -20, z: 10},
+            {x: 50, y: -20, z: 10}, {x: 0, y: -30, z: -20}, {x: -60, y: 0, z: -40}, {x: 60, y: 0, z: -40},
+            {x: -40, y: -80, z: 20}, {x: 40, y: -80, z: 20}, {x: -50, y: -90, z: -20}, {x: 50, y: -90, z: -20},
+            {x: -45, y: -100, z: 0}, {x: 45, y: -100, z: 0},
+            {x: 0, y: -50, z: -80}, {x: 10, y: -40, z: -120}, {x: -10, y: -30, z: -120}, {x: 0, y: -10, z: -150},
+            {x: 5, y: 10, z: -180}, {x: -5, y: 20, z: -180}, {x: 0, y: 40, z: -200},
+            {x: -80, y: 30, z: 0}, {x: 80, y: 30, z: 0}, {x: 0, y: -60, z: 50}, {x: 0, y: 20, z: 80},
+            {x: -100, y: -50, z: -50}, {x: 100, y: -50, z: -50}, {x: 120, y: 0, z: 0}, {x: -120, y: 0, z: 0}
+        ];
+        
+        const graphData = {
+            nodes: [
+                { id: 'Systems Thinking', type: 'topic', group: 'Head' },
+                { id: 'Discipline & Resilience', type: 'topic', group: 'Body' },
+                { id: 'Leadership & Pedagogy', type: 'topic', group: 'Legs' },
+                { id: 'Technology & Society', type: 'topic', group: 'Tail' },
+                { id: 'Pri-Fly Feedback Loop', type: 'insight', group: 'Head' }, { id: 'Deconstructing Problems', type: 'insight', group: 'Head' }, { id: 'Project Management for Research', type: 'insight', group: 'Head' },
+                { id: 'Internal vs External Structure', type: 'insight', group: 'Body' }, { id: 'Physics of Habit Formation', type: 'insight', group: 'Body' }, { id: 'Setback as a Catalyst', type: 'insight', group: 'Body' }, { id: 'Body as a Dynamic System', type: 'insight', group: 'Body' },
+                { id: 'Coaching as System Building', type: 'insight', group: 'Legs' }, { id: 'Prison Teaching Initiative', type: 'insight', group: 'Legs' }, { id: 'Neuroscience of Flow States', type: 'insight', group: 'Legs' },
+                { id: 'AI for Human Augmentation', type: 'insight', group: 'Tail' }, { id: 'Accessible Tech for Vets', type: 'insight', group: 'Tail' }, { id: 'Biomechanics of Swimming', type: 'insight', group: 'Legs' },
+                ...Array.from({ length: 10 }, (_, i) => ({ id: `Head Insight ${i+1}`, type: 'insight', group: 'Head' })),
+                ...Array.from({ length: 15 }, (_, i) => ({ id: `Body Insight ${i+1}`, type: 'insight', group: 'Body' })),
+                ...Array.from({ length: 10 }, (_, i) => ({ id: `Legs Insight ${i+1}`, type: 'insight', group: 'Legs' })),
+                ...Array.from({ length: 15 }, (_, i) => ({ id: `Tail Insight ${i+1}`, type: 'insight', group: 'Tail' })),
+            ].map((node, i) => ({ ...node, content: node.content || `Content for ${node.id}.` })),
+            links: []
+        };
+
+        const topics = graphData.nodes.filter(n => n.type === 'topic');
+        graphData.nodes.forEach(node => {
+            if (node.type === 'insight') {
+                const parentTopic = topics.find(t => t.group === node.group);
+                if (parentTopic) {
+                    graphData.links.push({ source: node.id, target: parentTopic.id });
+                }
+            }
+        });
+        graphData.links.push({ source: 'Systems Thinking', target: 'Discipline & Resilience' });
+        graphData.links.push({ source: 'Discipline & Resilience', target: 'Leadership & Pedagogy' });
+        graphData.links.push({ source: 'Discipline & Resilience', target: 'Technology & Society' });
+
+        let scene, camera, renderer, labelRenderer, controls;
+        let targetPosition = new THREE.Vector3();
+        let targetLookAt = new THREE.Vector3();
+        let isAnimatingCamera = false;
+        const color = d3.scaleOrdinal(["#ff7f0e", "#d62728", "#e377c2", "#ffbb78", "#fdbf6f"]);
+        
+        // --- NEW SMOOTH ZOOM VARIABLES ---
+        let targetDistance;
+        const minDistance = 100;
+        const maxDistance = 1200;
+
+        init();
+        animate();
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+            camera.position.z = 500;
+            targetDistance = camera.position.length(); // Initialize target distance
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('graph-container').appendChild(renderer.domElement);
+
+            labelRenderer = new CSS2DRenderer();
+            labelRenderer.setSize(window.innerWidth, window.innerHeight);
+            labelRenderer.domElement.style.position = 'absolute';
+            labelRenderer.domElement.style.top = '0px';
+            labelRenderer.domElement.style.pointerEvents = 'none';
+            document.getElementById('graph-container').appendChild(labelRenderer.domElement);
+
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.screenSpacePanning = false;
+            
+            // --- DISABLE DEFAULT ZOOM TO USE CUSTOM IMPLEMENTATION ---
+            controls.enableZoom = false;
+
+            scene.add(new THREE.AmbientLight(0xcccccc, 0.8));
+            camera.add(new THREE.PointLight(0xffffff, 1.2));
+            scene.add(camera);
+            
+            graphData.nodes.forEach((node, i) => {
+                const isTopic = node.type === 'topic';
+                const geometry = new THREE.SphereGeometry(isTopic ? 12 : 5, 16, 16);
+                const material = new THREE.MeshPhongMaterial({ color: color(node.group), transparent: true });
+                const sphere = new THREE.Mesh(geometry, material);
+                sphere.userData = node;
+                node.threeObj = sphere;
+                scene.add(sphere);
+
+                const labelDiv = document.createElement('div');
+                labelDiv.className = `node-label ${isTopic ? 'topic-label' : ''}`;
+                labelDiv.textContent = node.id;
+                const label = new CSS2DObject(labelDiv);
+                label.position.set(0, isTopic ? 15 : 8, 0);
+                sphere.add(label);
+            });
+
+            graphData.links.forEach(link => {
+                const material = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.15 });
+                const geometry = new THREE.BufferGeometry();
+                const line = new THREE.Line(geometry, material);
+                link.threeObj = line;
+                scene.add(line);
+            });
+
+            const simulation = d3.forceSimulation(graphData.nodes)
+                .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(50).strength(0.5))
+                .force("charge", d3.forceManyBody().strength(-20))
+                .force("center", d3.forceCenter(0, 0, 0))
+                .on("tick", ticked);
+
+            graphData.nodes.forEach((node, i) => {
+                const coord = foxShapeCoordinates[i % foxShapeCoordinates.length];
+                node.x = coord.x + (Math.random() - 0.5) * 50;
+                node.y = coord.y + (Math.random() - 0.5) * 50;
+                node.z = coord.z + (Math.random() - 0.5) * 50;
+            });
+
+            function ticked() {
+                graphData.nodes.forEach(node => node.threeObj.position.set(node.x, node.y, node.z));
+                graphData.links.forEach(link => {
+                    link.threeObj.geometry.setFromPoints([link.source.threeObj.position, link.target.threeObj.position]);
+                });
+            }
+            
+            // --- EVENT LISTENER FOR CUSTOM ZOOM ---
+            renderer.domElement.addEventListener('wheel', onWheel, { passive: false });
+        }
+
+        function onWheel(event) {
+            event.preventDefault();
+            // Adjust target distance based on scroll direction
+            const zoomSpeed = 0.5;
+            targetDistance += event.deltaY * zoomSpeed;
+            // Clamp the distance within min/max bounds
+            targetDistance = Math.max(minDistance, Math.min(maxDistance, targetDistance));
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // --- SMOOTH ZOOM LOGIC ---
+            // Get the current distance and smoothly interpolate towards the target
+            const currentDistance = camera.position.length();
+            const smoothedDistance = THREE.MathUtils.lerp(currentDistance, targetDistance, 0.1);
+            
+            // Apply the new distance while maintaining camera direction
+            camera.position.setLength(smoothedDistance);
+
+            controls.update(); 
+
+            if (isAnimatingCamera) {
+                camera.position.lerp(targetPosition, 0.05);
+                controls.target.lerp(targetLookAt, 0.05);
+                if (camera.position.distanceTo(targetPosition) < 0.1) {
+                    isAnimatingCamera = false;
+                }
+            }
+            renderer.render(scene, camera);
+            labelRenderer.render(scene, camera);
+        }
+        
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+        const infoPanel = document.getElementById('info-panel');
+        const infoTitle = document.getElementById('info-title');
+        const infoCategory = document.getElementById('info-category');
+        const infoContent = document.getElementById('info-content');
+        
+        document.getElementById('graph-container').addEventListener('click', onNodeClick);
+
+        function onNodeClick(event) {
+            event.preventDefault();
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(scene.children.filter(c => c.type === 'Mesh'));
+
+            if (intersects.length > 0) {
+                const clickedNode = intersects[0].object;
+                const d = clickedNode.userData;
+
+                const offset = new THREE.Vector3().subVectors(camera.position, controls.target).normalize().multiplyScalar(150);
+                targetPosition.copy(clickedNode.position).add(offset);
+                targetLookAt.copy(clickedNode.position);
+                isAnimatingCamera = true;
+                
+                infoPanel.classList.add('visible');
+                infoTitle.textContent = d.id;
+                infoCategory.textContent = d.group;
+                infoCategory.style.color = color(d.group);
+                infoContent.innerHTML = `<p>${d.content}</p>`;
+
+                graphData.nodes.forEach(node => {
+                    const isConnected = node.group === d.group;
+                    node.threeObj.material.opacity = isConnected ? 1.0 : 0.1;
+                    node.threeObj.children[0].element.style.opacity = isConnected ? 1.0 : 0.1;
+                });
+                graphData.links.forEach(link => {
+                    const isConnected = link.source.group === d.group && link.target.group === d.group;
+                    link.threeObj.material.opacity = isConnected ? 0.5 : 0.05;
+                });
+
+            } else {
+                 if (!isMouseOverPanel(event) && infoPanel.classList.contains('visible')) {
+                    infoPanel.classList.remove('visible');
+                    graphData.nodes.forEach(node => {
+                        node.threeObj.material.opacity = 1.0;
+                        node.threeObj.children[0].element.style.opacity = 1.0;
+                    });
+                    graphData.links.forEach(link => link.threeObj.material.opacity = 0.15);
+                 }
+            }
+        }
+        
+        function isMouseOverPanel(event) {
+            const rect = infoPanel.getBoundingClientRect();
+            return event.clientX >= rect.left;
+        }
+    </script>
+</body>
+</html>

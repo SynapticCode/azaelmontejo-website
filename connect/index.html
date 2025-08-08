@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect with Azael Montejo Jr.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0f26;
+            color: #f0f0f0;
+        }
+        .princeton-orange { color: #F58426; }
+        .electric-blue { color: #0066CC; }
+        .bg-princeton-orange { background-color: #F58426; }
+        .border-princeton-orange { border-color: #F58426; }
+        .cosmic-indigo { color: #8b5cf6; }
+        .gateway-bg {
+            background: linear-gradient(135deg, #0c0c1a 0%, #1a0c2e 50%, #0c0c1a 100%);
+            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .exobound-section {
+            font-family: 'Orbitron', 'Arial', sans-serif;
+        }
+        .exo-blue { color: #66ccff; }
+        .exo-orange { color: #ff9900; }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(102, 204, 255, 0.5);
+        }
+        .btn-exobound {
+            color: #ff9900;
+            font-size: 24px;
+            font-family: 'Orbitron', 'Arial', sans-serif;
+            animation: pulse 1.5s infinite;
+            border: 1px solid #ff9900;
+            padding: 15px 30px;
+            border-radius: 25px;
+            background: rgba(255, 153, 0, 0.1);
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 32px;
+            font-weight: 700;
+        }
+        .btn-exobound:hover {
+            background: rgba(255, 153, 0, 0.2);
+            text-decoration: none;
+            color: #ff9900;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            background-color: #1a1b2e;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #66ccff;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+        .close {
+            color: #66ccff;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #ff9900;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #66ccff;
+            font-weight: 600;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: rgba(102, 204, 255, 0.1);
+            border: 1px solid rgba(102, 204, 255, 0.3);
+            border-radius: 5px;
+            color: #f0f0f0;
+            font-family: 'Inter', sans-serif;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #66ccff;
+            box-shadow: 0 0 10px rgba(102, 204, 255, 0.3);
+        }
+        .btn-send {
+            background: linear-gradient(90deg, #66ccff, #ff9900);
+            color: #0c0c1a;
+            font-weight: 700;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+        .btn-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 204, 255, 0.3);
+        }
+        .btn-ecosystem {
+            background: #2d1a4a;
+            color: #fff;
+            border: 2px solid #4F00BC;
+            box-shadow: 0 0 0 0 #7c3aed;
+            transition: box-shadow 0.3s, transform 0.1s, background 0.2s, color 0.2s;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 0.85rem 2.5rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            outline: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn-ecosystem:hover {
+            box-shadow: 0 0 24px 6px #7c3aed;
+            background: #4F00BC;
+            color: #fff;
+            text-decoration: none;
+        }
+        .btn-ecosystem:active {
+            transform: scale(0.95) translateY(2px);
+            box-shadow: 0 0 32px 12px #7c3aed;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-900/95 backdrop-blur-sm z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center h-16">
+                <a href="../index.html" class="text-2xl font-bold cosmic-indigo">AMJ</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html#about" class="hover:cosmic-indigo transition-colors">About</a>
+                    <a href="../index.html#pillars" class="hover:cosmic-indigo transition-colors">Pillars</a>
+                    <a href="../index.html#insights" class="hover:cosmic-indigo transition-colors">Insights</a>
+                    <a href="../index.html#ecosystem" class="hover:cosmic-indigo transition-colors">Connect</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-white" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden fixed top-16 w-full bg-gray-900/95 backdrop-blur-sm z-40 border-b border-gray-800 hidden">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex flex-col space-y-4">
+                <a href="../index.html#about" class="hover:cosmic-indigo transition-colors">About</a>
+                <a href="../index.html#pillars" class="hover:cosmic-indigo transition-colors">Pillars</a>
+                <a href="../index.html#insights" class="hover:cosmic-indigo transition-colors">Insights</a>
+                <a href="../index.html#ecosystem" class="hover:cosmic-indigo transition-colors">Connect</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 1: INTRODUCTION -->
+    <section class="py-20 md:py-24">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="grid md:grid-cols-3 gap-8 md:gap-12 items-center">
+                <div class="md:col-span-1 flex justify-center">
+                    <img src="../assets/azael-profile.jpg" 
+                         alt="Professional headshot of Azael Montejo Jr." 
+                         class="rounded-full w-48 h-48 md:w-60 md:h-60 object-cover border-4 border-electric-blue shadow-2xl"
+                         style="object-position: center 30%;"
+                         onerror="this.onerror=null;this.src='https://placehold.co/300x300/0d0f26/FFFFFF?text=Image';">
+                </div>
+                <div class="md:col-span-2 text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl font-black text-white">Azael Montejo Jr.</h1>
+                    <p class="text-xl font-semibold electric-blue mt-1">Founder. Systems Architect. Researcher.</p>
+                    <p class="mt-4 text-gray-300 leading-relaxed">
+                        My life's work has been to invest in the potential of others. As a founder and coach, I learned that true progress comes from architecting systems that empower people to become the strongest versions of themselves.
+                    </p>
+                    <p class="mt-4 text-gray-300 leading-relaxed">
+                        But the architect of systems for others was fighting a private battle, struggling with unaddressed issues that led to the collapse of the world I had built. My journey since has been one of total reconstruction. It has taught me that your potential is always more powerful than your past, and it has given me a new mission: to build tools that empower others to architect their own resurrection.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: THE STORY -->
+    <section class="py-20 md:py-24 bg-black bg-opacity-20">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">The <span class="princeton-orange">Architect's Journey</span></h2>
+            <div class="space-y-6 text-gray-300 leading-relaxed">
+                <p>
+                    For over two decades, my world was built around helping people achieve what they thought was impossible. I founded a small little community business I called <strong class="text-white">Swim Technique Academy</strong>, born from a deep passion for teaching in the water. It wasn't just about teaching strokes; it was about empowerment. I taught three-year-olds to find their courage and float for the first time. I worked with mothers, giving them the tools to teach their own children how to survive in the water. I coached triathletes to shave minutes off their time and guided swimmers to conquer the open ocean.
+                </p>
+                <p>
+                    As a trainer at Equinox, I translated complex biomechanics into programs that changed lives. One of my proudest moments came when a executive I had trained for years used his newfound strength and swimming prowess to <strong class="text-white">rescue two children from a riptide in the Hamptons</strong>. This was my work: investing everything I had to build people up, to witness their transformation.
+                </p>
+                <p>
+                    But behind this success, I was broken. While I was a dedicated coach and a meticulous founder, I was fighting a private battle with depression and anxiety that was slowly eroding my own foundation. I was an expert at building systems for others, but the one I built for myself was designed to hide my struggle, and eventually, it crumbled completely.
+                </p>
+                <p>
+                    Incarceration was the stark, deafening silence after that collapse. It was there, stripped of a life I no longer recognized, that I made a vow. I would not be defined by my failure. I would dedicate myself to becoming a better version of who I was. Education became the tool for this reconstruction. Immersed in books on psychology and strategy, I began to architect a new life, brick by brick, earning a college degree with a <strong class="text-white">4.0 GPA</strong>.
+                </p>
+                <p>
+                    That vow was truly tested when I arrived at Princeton. The opportunity, made possible by the vision of the NSF REU program and the Princeton Prison Teaching Initiative, was a dream. But the reality was a profound challenge. I was an outsider, and I felt it in the stares of my younger peers. The academic workload was immense, and my old anxieties crept back in. But this time, unlike in my past, I knew how to ask for help. The lifeline support of my mentors and the unwavering belief of my friends gave me the strength to navigate the complexities. I refused to let my past dictate my future. I worked with a relentless drive, fueled by the desire to honor the risk that this institution had taken on me.
+                </p>
+                <p class="font-semibold text-white mt-8 text-lg">
+                    The success of my research project is more than an academic achievement; it's a prototype for a better way of operating. It is living proof of what can happen when we invest in human potential. My goal now is to scale that prototype—to build new bridges between institutions like Rutgers and Princeton, creating research-driven, entrepreneurial solutions to complex social problems. I am seeking mentors, collaborators, and partners who believe in this mission and want to help me build it.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: THE GATEWAY (FOR SYMPOSIUM) -->
+    <section class="gateway-bg relative exobound-section">
+        <div class="absolute inset-0 bg-black opacity-70"></div>
+        <div class="relative container mx-auto px-6 max-w-4xl text-center py-20">
+            <h2 class="text-2xl md:text-3xl font-bold text-white text-glow">Connecting at the Princeton Research Symposium?</h2>
+            <p class="exo-blue mt-4 max-w-2xl mx-auto text-lg">
+                Thank you for your interest in my presentation. The EXOBOUND project is the direct result of the journey you just read about. To see how my experience was translated into a powerful new research tool, please visit the dedicated project page.
+            </p>
+            <a href="../exobound-research.html" class="mt-8 btn-exobound">
+                Explore the EXOBOUND Project
+            </a>
+        </div>
+    </section>
+
+    <!-- SECTION 4: THE HUB (GENERAL CONNECTIONS) -->
+    <section class="py-20 md:py-24">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Let's Build the Future <span class="electric-blue">Together.</span></h2>
+            <p class="text-gray-300 max-w-xl mx-auto mb-10">My work is centered on collaboration. If my mission resonates with you, I invite you to connect.</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="https://www.linkedin.com/in/azaelmontejojr/" target="_blank" rel="noopener noreferrer" class="btn-ecosystem w-full sm:w-auto">
+                    <i class="fab fa-linkedin text-xl"></i>
+                    Connect on LinkedIn
+                </a>
+                <button onclick="openContactModal()" class="btn-ecosystem w-full sm:w-auto border-none">
+                    <i class="fas fa-envelope text-xl"></i>
+                    Contact Me
+                </button>
+                <a href="https://www.instagram.com/azael.montejo.jr/" target="_blank" rel="noopener noreferrer" class="btn-ecosystem w-full sm:w-auto">
+                    <i class="fab fa-instagram text-xl"></i>
+                    Follow on Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black bg-opacity-30 text-gray-400 text-center py-12">
+        <div class="container mx-auto px-6">
+            <p class="text-sm">&copy; 2025 Azael Montejo Jr.</p>
+        </div>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeContactModal()">&times;</span>
+            <h2 style="color: #66ccff; font-family: 'Orbitron', Arial, sans-serif; margin-bottom: 20px;">Contact Me</h2>
+            <form id="contactForm" onsubmit="submitContactForm(event)">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn-send">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Initialize EmailJS
+        (function(){
+            emailjs.init("VKr4CXJi8MkzaweC4");
+        })();
+
+        function openContactModal() {
+            document.getElementById('contactModal').style.display = 'block';
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function submitContactForm(event) {
+            event.preventDefault();
+            
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            const formData = new FormData(event.target);
+            const templateParams = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                subject: formData.get('subject'),
+                message: formData.get('message')
+            };
+            
+            // Send email using EmailJS
+            emailjs.send('service_0di3jju', 'template_ohrrhbb', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    
+                    // Show success message
+                    alert('Message sent successfully! I\'ll get back to you soon.');
+                    
+                    // Reset form and close modal
+                    event.target.reset();
+                    closeContactModal();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Email failed to send. Error: ' + error.text);
+                    
+                    closeContactModal();
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
+        }
+    </script>
+
+</body>
+</html>

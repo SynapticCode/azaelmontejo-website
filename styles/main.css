@@ -1,0 +1,206 @@
+:root {
+    --color-bg: #030414;
+    --color-bg-card: #18122b;
+    --color-purple: #4F00BC;
+    --color-purple-bright: #7c3aed;
+    --color-purple-dark: #2d1a4a;
+    --color-orange: #ff7f0e;
+    --color-white: #fff;
+    --color-offwhite: #e0e0e0;
+    --color-gray: #bcbcbc;
+    --color-border: #23243a;
+    --font-main: 'Inter', sans-serif;
+    --font-heading: 'Space Grotesk', sans-serif;
+}
+body {
+    background-color: var(--color-bg);
+    color: var(--color-offwhite);
+    font-family: var(--font-main);
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-white);
+}
+.cosmic-indigo { color: var(--color-orange); }
+.bg-cosmic-indigo { background-color: var(--color-orange); }
+.border-cosmic-indigo { border-color: var(--color-orange); }
+.text-slate-600 { color: var(--color-gray); }
+.bg-white, .bg-gray-50 { background-color: var(--color-bg-card) !important; }
+.border-gray-200 { border-color: var(--color-border) !important; }
+.shadow-sm { box-shadow: 0 2px 8px rgba(0,0,0,0.25) !important; }
+.rounded-lg { border-radius: 1rem !important; }
+.fade-in-up.visible { opacity: 1; transform: translateY(0); }
+a, .cosmic-indigo { transition: color 0.2s; }
+a:hover, .cosmic-indigo:hover { color: var(--color-orange); }
+.btn-blog {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--color-purple-dark) 0%, var(--color-purple) 100%);
+    color: var(--color-white);
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 0.85rem 2.5rem;
+    border-radius: 9999px;
+    margin: 2.5rem auto 0 auto;
+    box-shadow: 0 4px 24px rgba(79,0,188,0.15);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.btn-blog:hover {
+    background: linear-gradient(90deg, var(--color-purple) 0%, var(--color-purple-dark) 100%);
+    color: var(--color-white);
+    box-shadow: 0 6px 32px var(--color-purple-bright);
+}
+.pillar-title, .card-title {
+    color: var(--color-white) !important;
+}
+.pillar-body, .card-body {
+    color: var(--color-offwhite) !important;
+}
+.hero-title {
+    color: var(--color-white) !important;
+}
+.hero-headline {
+    color: var(--color-white);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow: none;
+}
+.hero-name {
+    color: var(--color-white);
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-align: center;
+    text-shadow: none;
+    margin-bottom: 1.5rem;
+}
+.hero-sub {
+    color: var(--color-offwhite);
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+@media (min-width: 600px) {
+    .hero-headline {
+        font-size: 2.2rem;
+    }
+}
+@media (min-width: 1024px) {
+    .hero-headline {
+        font-size: 2.5rem;
+    }
+}
+@media (min-width: 768px) {
+    .hero-name {
+        font-size: 6rem;
+    }
+    .hero-sub {
+        font-size: 2rem;
+    }
+}
+@media (min-width: 1200px) {
+    .hero-name {
+        font-size: 8rem;
+    }
+}
+.landing-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw; height: 100vh;
+    background: var(--color-bg);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.7s;
+}
+.landing-overlay.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+body.landing-locked {
+    overflow: hidden;
+}
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff !important;
+}
+.card-body {
+    color: #e0e0e0 !important;
+}
+.card-link {
+    color: var(--color-orange) !important;
+    font-weight: 600;
+}
+.card-link:hover {
+    color: #ffd700 !important;
+}
+/* Button Glow & Jump Animation */
+.btn-ecosystem {
+    background: var(--color-purple-dark);
+    color: var(--color-white);
+    border: 2px solid var(--color-purple);
+    box-shadow: 0 0 0 0 var(--color-purple-bright);
+    transition: box-shadow 0.3s, transform 0.1s, background 0.2s, color 0.2s;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 0.85rem 2.5rem;
+    border-radius: 9999px;
+    margin: 2.5rem auto 0 auto;
+    cursor: pointer;
+    outline: none;
+    display: inline-block;
+}
+.btn-ecosystem:hover {
+    box-shadow: 0 0 24px 6px var(--color-purple-bright);
+    background: var(--color-purple);
+    color: var(--color-white);
+}
+.btn-ecosystem:active {
+    transform: scale(0.95) translateY(2px);
+    box-shadow: 0 0 32px 12px var(--color-purple-bright);
+}
+.btn-ecosystem.orange {
+    background: var(--color-purple-dark);
+    border-color: var(--color-purple);
+    color: var(--color-white);
+}
+.btn-ecosystem.orange:hover {
+    background: var(--color-purple);
+    color: var(--color-white);
+    box-shadow: 0 0 24px 6px var(--color-purple-bright);
+}
+/* Make all links purple by default */
+a, .card-link {
+    color: var(--color-purple);
+    transition: color 0.2s, text-shadow 0.2s;
+    text-shadow: none;
+}
+a:hover, .card-link:hover {
+    color: var(--color-purple-bright);
+    text-shadow: 0 0 8px var(--color-purple-bright), 0 0 2px var(--color-purple-bright);
+}
+/* White/offwhite backgrounds for journey and want to know more */
+.bg-white-section, .bg-offwhite, .text-dark {
+    background: none !important;
+    color: var(--color-offwhite) !important;
+}
+@keyframes jump {
+    0% { transform: scale(0.95) translateY(2px); }
+    30% { transform: scale(1.05) translateY(-12px); }
+    60% { transform: scale(1) translateY(0); }
+    100% { transform: scale(1) translateY(0); }
+}
+.btn-ecosystem.jump {
+    animation: jump 0.5s cubic-bezier(.28,.84,.42,1) 1;
+}
+/* Unify all section and card backgrounds to the same dark purple as 'The Journey' */
+.bg-white, .bg-gray-50, .rounded-lg, .shadow-sm, section, footer {
+    background-color: var(--color-bg) !important;
+} 

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attentional Horizons - Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #003366;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .game-container {
+            width: 800px;
+            height: 500px;
+            background-color: #333;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .player {
+            width: 30px;
+            height: 30px;
+            background-color: #ffcc00;
+            border-radius: 50%;
+            position: absolute;
+            top: 250px;
+            left: 400px;
+        }
+        .npc {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .operations {
+            background-color: #3399ff;
+            top: 150px;
+            left: 200px;
+        }
+        .rnd {
+            background-color: #ff6699;
+            top: 150px;
+            left: 600px;
+        }
+        .dialog {
+            position: absolute;
+            width: 500px;
+            background-color: #1565c0;
+            border-radius: 10px;
+            padding: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 10;
+        }
+        .dialog-title {
+            background-color: #003c8f;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .dialog-content {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .dialog-buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+        button {
+            background-color: #003c8f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .feedback {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+            z-index: 20;
+        }
+        .success {
+            color: #00ff00;
+        }
+        .failure {
+            color: #ff0000;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            width: 800px;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 5px;
+        }
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Attentional Horizons</h1>
+        <p>A Study of Exploration vs. Exploitation in Organizational Decision-Making</p>
+    </header>
+
+    <div class="stats">
+        <div>Score: <span id="score">0</span></div>
+        <div>Time: <span id="time">300</span> seconds</div>
+    </div>
+
+    <div class="game-container">
+        <div class="player" id="player"></div>
+        <div class="npc operations">Ops</div>
+        <div class="npc rnd">R&D</div>
+
+        <div class="dialog" id="operations-dialog">
+            <div class="dialog-title">Operations</div>
+            <div class="dialog-content">A new shipment has arrived. How should we process it?</div>
+            <div class="dialog-buttons">
+                <button onclick="makeChoice('operations', 'exploitation')">Follow SOP</button>
+                <button onclick="makeChoice('operations', 'exploration')">Try New Algorithm</button>
+            </div>
+        </div>
+
+        <div class="dialog" id="rnd-dialog">
+            <div class="dialog-title">R&D</div>
+            <div class="dialog-content">We have a prototype idea. Should we pursue it?</div>
+            <div class="dialog-buttons">
+                <button onclick="makeChoice('rnd', 'exploitation')">Refine Existing Tech</button>
+                <button onclick="makeChoice('rnd', 'exploration')">Develop Blue-Sky Project</button>
+            </div>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <div class="controls">
+        <p>Use arrow keys to move. Press E when near an NPC to interact.</p>
+    </div>
+
+    <script>
+        // Game state
+        const gameState = {
+            score: 0,
+            timeRemaining: 300,
+            stability: 0,
+            innovation: 0,
+            exploitCount: 0,
+            exploreCount: 0,
+            gameData: []
+        };
+
+        // DOM elements
+        const player = document.getElementById('player');
+        const scoreDisplay = document.getElementById('score');
+        const timeDisplay = document.getElementById('time');
+        const operationsDialog = document.getElementById('operations-dialog');
+        const rndDialog = document.getElementById('rnd-dialog');
+        const feedbackElement = document.getElementById('feedback');
+
+        // Player position
+        let playerX = 400;
+        let playerY = 250;
+        let playerSpeed = 5;
+
+        // Key states
+        const keys = {
+            ArrowUp: false,
+            ArrowDown: false,
+            ArrowLeft: false,
+            ArrowRight: false,
+            e: false
+        };
+
+        // Game timer
+        const gameTimer = setInterval(() => {
+            gameState.timeRemaining--;
+            timeDisplay.textContent = gameState.timeRemaining;
+            
+            if (gameState.timeRemaining <= 0) {
+                clearInterval(gameTimer);
+                endGame();
+            }
+        }, 1000);
+
+        // Event listeners
+        document.addEventListener('keydown', (e) => {
+            if (keys.hasOwnProperty(e.key)) {
+                keys[e.key] = true;
+            }
+            
+            // Interaction key
+            if (e.key === 'e' || e.key === 'E') {
+                checkInteraction();
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (keys.hasOwnProperty(e.key)) {
+                keys[e.key] = false;
+            }
+        });
+
+        // Game loop
+        function gameLoop() {
+            // Move player
+            if (keys.ArrowUp && playerY > 30) playerY -= playerSpeed;
+            if (keys.ArrowDown && playerY < 470) playerY += playerSpeed;
+            if (keys.ArrowLeft && playerX > 30) playerX -= playerSpeed;
+            if (keys.ArrowRight && playerX < 770) playerX += playerSpeed;
+            
+            // Update player position
+            player.style.top = playerY + 'px';
+            player.style.left = playerX + 'px';
+            
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Check if player is near an NPC
+        function checkInteraction() {
+            // Check distance to Operations NPC
+            const distToOps = Math.sqrt(Math.pow(playerX - 220, 2) + Math.pow(playerY - 170, 2));
+            if (distToOps < 70) {
+                operationsDialog.style.display = 'block';
+                return;
+            }
+            
+            // Check distance to R&D NPC
+            const distToRnD = Math.sqrt(Math.pow(playerX - 620, 2) + Math.pow(playerY - 170, 2));
+            if (distToRnD < 70) {
+                rndDialog.style.display = 'block';
+                return;
+            }
+        }
+
+        // Handle player choice
+        function makeChoice(npc, choiceType) {
+            // Hide dialogs
+            operationsDialog.style.display = 'none';
+            rndDialog.style.display = 'none';
+            
+            // Deduct time
+            const timeCost = 15;
+            gameState.timeRemaining -= timeCost;
+            timeDisplay.textContent = gameState.timeRemaining;
+            
+            // Process outcome
+            let outcome = {};
+            if (choiceType === 'exploitation') {
+                gameState.exploitCount++;
+                gameState.stability += 5;
+                outcome = { score: 10, success: true }; // Predictable outcome
+            } else { // exploration
+                gameState.exploreCount++;
+                if (Math.random() > 0.5) {
+                    gameState.innovation += 10;
+                    outcome = { score: 30, success: true }; // High reward
+                } else {
+                    outcome = { score: 0, success: false }; // Failure
+                }
+            }
+            
+            // Update score
+            gameState.score += outcome.score;
+            scoreDisplay.textContent = gameState.score;
+            
+            // Show feedback
+            feedbackElement.textContent = outcome.success ? 
+                `Success! +${outcome.score} points` : 
+                'Attempt failed. No points gained.';
+            feedbackElement.className = 'feedback ' + (outcome.success ? 'success' : 'failure');
+            feedbackElement.style.display = 'block';
+            
+            // Hide feedback after 2 seconds
+            setTimeout(() => {
+                feedbackElement.style.display = 'none';
+            }, 2000);
+            
+            // Log event
+            gameState.gameData.push({
+                timestamp: new Date().toISOString(),
+                game_time_remaining: gameState.timeRemaining,
+                event_type: 'interaction',
+                npc: npc,
+                choice: choiceType,
+                outcome_score: outcome.score,
+                outcome_success: outcome.success,
+                time_cost: timeCost
+            });
+        }
+
+        // End game
+        function endGame() {
+            // Calculate ending type
+            const exploreRatio = gameState.exploreCount / (gameState.exploitCount + gameState.exploreCount || 1);
+            
+            let endingType;
+            if (gameState.stability < 10 && gameState.innovation > 30) {
+                endingType = 'chaotic_genius';
+            } else if (gameState.stability > 40 && gameState.innovation < 10) {
+                endingType = 'optimizer';
+            } else if (exploreRatio > 0.75) {
+                endingType = 'visionary';
+            } else if (exploreRatio < 0.25 && gameState.stability < 10) {
+                endingType = 'burnout';
+            } else {
+                endingType = 'balanced_mind';
+            }
+            
+            // Show ending
+            alert(`Game Over!\n\nYour ending: ${endingType}\nFinal Score: ${gameState.score}\nStability: ${gameState.stability}\nInnovation: ${gameState.innovation}\nExplore Ratio: ${Math.round(exploreRatio * 100)}%`);
+            
+            // Reload for replay
+            location.reload();
+        }
+
+        // Start game loop
+        gameLoop();
+    </script>
+</body>
+</html>
