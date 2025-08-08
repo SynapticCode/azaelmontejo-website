@@ -1,0 +1,23 @@
+[
+  {
+    "trialId": 0,
+    "asteroidHealth": 100,
+    "spawnRaider": true,
+    "raiderType": "red",
+    "raiderPosition": {"x": 0.7, "y": 0.4}
+  },
+  {
+    "trialId": 1,
+    "asteroidHealth": 80,
+    "spawnRaider": true,
+    "raiderType": "blue",
+    "raiderPosition": {"x": 0.3, "y": 0.3}
+  },
+  {
+    "trialId": 2,
+    "asteroidHealth": 60,
+    "spawnRaider": true,
+    "raiderType": "green",
+    "raiderPosition": {"x": 0.6, "y": 0.5}
+  }
+]

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EXOBOUND: Tactical Fleet Command Research Study - Academic research on decision-making in complex tactical environments">
+    <meta name="keywords" content="research, psychology, decision-making, tactical simulation, academic study">
+    <meta name="author" content="Azael Montejo Jr.">
+    <meta name="copyright" content="© 2025 Azael Montejo Jr. Licensed under CC BY-NC 4.0">
+    <meta name="license" content="CC BY-NC 4.0 - Creative Commons Attribution-NonCommercial">
+    <link rel="canonical" href="https://azaelmontejo.com/exobound">
+    
+    <title>EXOBOUND: Tactical Fleet Command Research Study</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- jsPsych CSS -->
+    <link rel="stylesheet" href="jspsych/jspsych.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0 0 50px 0;
+            background: linear-gradient(135deg, #0c0c1a 0%, #1a0c2e 50%, #0c0c1a 100%);
+            font-family: 'Orbitron', 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0c0c1a 0%, #1a0c2e 50%, #0c0c1a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: #66ccff;
+            font-family: 'Orbitron', 'Arial', sans-serif;
+        }
+        
+        .loading-text {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(102, 204, 255, 0.5);
+        }
+        
+        .loading-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(102, 204, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #66ccff, #ff9900);
+            border-radius: 2px;
+            animation: loading-pulse 1.5s ease-in-out infinite;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        @keyframes loading-pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        .copyright-notice {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #666;
+            font-size: 10px;
+            font-family: 'Arial', sans-serif;
+            z-index: 999;
+            text-align: center;
+        }
+        
+        .copyright-notice a {
+            color: #66ccff;
+            text-decoration: none;
+        }
+        
+        .copyright-notice a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Ensure jsPsych content has proper spacing */
+        .jspsych-display-element {
+            padding-bottom: 60px;
+        }
+        
+        /* Ensure Phaser game containers have proper spacing */
+        #jspsych-phaser-game-container {
+            margin-bottom: 60px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading">
+        <div class="loading-text">EXOBOUND: Tactical Fleet Command</div>
+        <div class="loading-text" style="font-size: 16px; color: #ff9900;">Loading Research Study...</div>
+        <div class="loading-bar">
+            <div class="loading-progress" id="loading-progress"></div>
+        </div>
+    </div>
+
+    <!-- Copyright Notice -->
+    <div class="copyright-notice">
+        © 2025 <a href="https://azaelmontejo.com" target="_blank">Azael Montejo Jr.</a> | 
+        <a href="https://linkedin.com/in/azaelmontejojr" target="_blank">LinkedIn</a> | 
+        Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+    </div>
+
+    <!-- jsPsych Core -->
+    <script src="jspsych/jspsych.js"></script>
+    <script src="jspsych/plugin-html-keyboard-response.js"></script>
+    <script src="jspsych/plugin-html-button-response.js"></script>
+
+    <!-- Phaser 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
+
+    <!-- Game Core Systems -->
+    <script src="js/utils/GlobalSettings.js"></script>
+    <script src="js/GameDataManager.js"></script>
+    <script src="js/utils/PerformanceTracker.js"></script>
+    <script src="js/utils/DialogueSelector.js"></script>
+    <script src="js/utils/NarrativeEngine.js"></script>
+    <script src="js/utils/AnimationManager.js"></script>
+    <script src="js/utils/InputManager.js"></script>
+    <script src="js/utils/LoadingUI.js"></script>
+
+    <!-- Asset Management -->
+    <script src="js/loaders/AssetLoader.js"></script>
+
+    <!-- Dialogue Content -->
+    <script src="js/dialogues/wave1tutorialdialogue.js"></script>
+    <script src="js/dialogues/wave2dialogue.js"></script>
+    <script src="js/dialogues/wave3dialogue.js"></script>
+    <script src="js/dialogues/wave4dialogue.js"></script>
+    <script src="js/dialogues/wave5dialogue.js"></script>
+    <script src="js/dialogues/waves6to10.js"></script>
+    <script src="js/dialogues/wavesComplete.js"></script>
+
+    <!-- Game Scenes -->
+    <script src="js/scenes/BootScene.js"></script>
+    <script src="js/scenes/BriefingScene.js"></script>
+    <script src="js/scenes/GameScene.js"></script>
+    <script src="js/scenes/TutorialScene.js"></script>
+    <script src="js/scenes/TutorialUIScene.js"></script>
+    <script src="js/scenes/HUDScene.js"></script>
+    <script src="js/scenes/FeedbackScene.js"></script>
+    <script src="js/scenes/FeedbackSceneV2.js"></script>
+    <script src="js/scenes/WaveOutcomeScene.js"></script>
+    <script src="js/scenes/PostSurveyScene.js"></script>
+    <script src="js/scenes/InstructionScene.js"></script>
+
+    <!-- Visual Effects -->
+    <script src="js/components/feedback/BattleAnimator.js"></script>
+    <script src="js/components/feedback/ExplosionLoader.js"></script>
+    <script src="js/components/feedback/FleetManager.js"></script>
+    <script src="js/components/feedback/ResultsDisplay.js"></script>
+    <script src="js/components/feedback/ScoreDisplay.js"></script>
+    <script src="js/components/feedback/TacticalBackground.js"></script>
+
+    <!-- Experiment Controller (Must be last) -->
+    <script src="js/experiment.js"></script>
+
+    <script>
+        // Enhanced loading progress simulation
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBar = document.getElementById('loading-progress');
+            let progress = 0;
+            
+            const updateProgress = () => {
+                progress += Math.random() * 10;
+                if (progress > 100) progress = 100;
+                progressBar.style.width = progress + '%';
+                
+                if (progress < 100) {
+                    setTimeout(updateProgress, 100 + Math.random() * 200);
+                }
+            };
+            
+            updateProgress();
+        });
+
+        // Enhanced error handling
+        window.addEventListener('error', function(e) {
+            console.error('EXOBOUND Error:', e.error);
+            const loading = document.getElementById('loading');
+            if (loading && loading.style.display !== 'none') {
+                loading.innerHTML = `
+                    <div style="text-align: center; color: #ff6666;">
+                        <h2>Loading Error</h2>
+                        <p>Please refresh the page to try again.</p>
+                        <p style="font-size: 12px; color: #999;">If problems persist, ensure you have a stable internet connection.</p>
+                    </div>
+                `;
+            }
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', function() {
+            console.log('EXOBOUND: All resources loaded');
+            console.log('Performance:', {
+                loadTime: performance.now(),
+                memory: performance.memory ? performance.memory.usedJSHeapSize : 'N/A'
+            });
+        });
+    </script>
+</body>
+</html>

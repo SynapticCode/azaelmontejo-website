@@ -1,0 +1,38 @@
+<div class="slider_container">
+    <div id="slider"></div>
+</div>
+<div class="engineer_container">
+<table>
+    <tr>
+        <td>
+            <i class="fa-solid fa-user"></i>
+        </td>
+        <td>
+            <h2>x<span id="n_received"></span></h2>
+        </td>
+        <td>engineers received your message and made connectors of size <strong id="ideal"></strong></td>
+    </tr>
+    <tr>
+        <td>
+            <i class="fa-solid fa-user-slash fail"></i>
+        </td>
+        <td>
+            <h2 class="fail">x<span id="n_failed"></span></h2>
+        </td>
+        <td>engineers did not receive your message and made connectors of size <strong id="std"></strong></td>
+    </tr>
+</table>
+</div>
+<div class="score_container">
+    <p>Social loss: <span class="slider_val social-score"></span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Environment loss: <span class="slider_val env-score"></span></p>
+    <p>Total loss: <span class="slider_val total-score"></span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Bonus: <span class="slider_val bonus"></span></p>
+</div>
+
+<div class="progress-btn" data-progress-style="fill-back">
+    <div class="btn">Continue</div>
+    <div class="progress"></div>
+</div>

@@ -1,0 +1,16 @@
+<h1>Instructions</h1>
+<p>You'll be assigned two scores for every Widget you make. These scores are <strong>loss scores</strong> - meaning that they're <emph>negative</emph> values that measure how far your Widgets are from ideal. Your goal in this game is to <strong>incur the smallest losses.</strong>
+<p>First, you'll be given an <strong class="ideal-size-container">environment loss score</strong> based on how far your Widget is from the ideal size. 
+    The closer the Widget is to the ideal size, the better it will function. </p>
+<p>Let's do an analysis! Move the sliders to change the size of this widget. As you change the widget's size, we'll tell
+    you your environment loss score. <strong>Please take your time to experiment and try lots of different sizes—in the next
+        slide, you'll be asked to report the ideal size for this widget.</strong></p>
+<div class="widget_sizer">
+    <div class="widget_container">
+        <img class="widget" src="images/widget_demo.jpg" />
+    </div>
+    <div id="slider"></div>
+    <p>Size: <span id="slider_size" class="slider_val"></span> &nbsp; &nbsp; Environment loss: <span id="slider_score"
+            class="slider_val"></span></p>
+    <button class="inactive">Continue</button>
+</div>
