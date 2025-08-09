@@ -44,7 +44,14 @@ class SharedNavigation {
         const navItemsHTML = this.navItems.map(item => {
             const isActive = item.id === currentPage;
             const activeClass = isActive ? 'text-orange-400 font-bold' : 'text-gray-300';
-            const href = item.href.startsWith('/') ? basePath + item.href : item.href;
+            
+            // Fix: Properly handle path concatenation
+            let href = item.href;
+            if (item.href.startsWith('/')) {
+                // Remove leading slash and concatenate with basePath
+                const cleanHref = item.href.substring(1);
+                href = basePath + cleanHref;
+            }
             
             return `<a href="${href}" class="${activeClass} link-hover">${item.text}</a>`;
         }).join('');
@@ -52,7 +59,14 @@ class SharedNavigation {
         const mobileNavItemsHTML = this.navItems.map(item => {
             const isActive = item.id === currentPage;
             const activeClass = isActive ? 'text-orange-400 font-bold' : 'text-gray-300';
-            const href = item.href.startsWith('/') ? basePath + item.href : item.href;
+            
+            // Fix: Properly handle path concatenation
+            let href = item.href;
+            if (item.href.startsWith('/')) {
+                // Remove leading slash and concatenate with basePath
+                const cleanHref = item.href.substring(1);
+                href = basePath + cleanHref;
+            }
             
             return `<a href="${href}" class="block py-2 ${activeClass} link-hover">${item.text}</a>`;
         }).join('');
@@ -61,7 +75,7 @@ class SharedNavigation {
             <!-- Navigation Bar -->
             <nav class="w-full flex items-center justify-between px-6 py-4 bg-black/60 sticky top-0 z-50 border-b border-slate-800">
                 <div>
-                    <a href="${basePath}/" class="text-xl font-bold text-white link-hover">Azael Montejo</a>
+                    <a href="${basePath}" class="text-xl font-bold text-white link-hover">Azael Montejo</a>
                 </div>
                 <div class="hidden md:flex items-center space-x-6 text-sm">
                     ${navItemsHTML}
@@ -100,16 +114,20 @@ class SharedNavigation {
      * Inject the navigation into the page
      */
     inject() {
-        const navigationHTML = this.generateNavigationHTML();
-        
-        // Find the body element
-        const body = document.body;
-        
-        // Insert navigation at the beginning of the body
-        body.insertAdjacentHTML('afterbegin', navigationHTML);
-        
-        // Add mobile menu functionality
-        this.setupMobileMenu();
+        try {
+            const navigationHTML = this.generateNavigationHTML();
+            
+            // Find the body element
+            const body = document.body;
+            
+            // Insert navigation at the beginning of the body
+            body.insertAdjacentHTML('afterbegin', navigationHTML);
+            
+            // Add mobile menu functionality
+            this.setupMobileMenu();
+        } catch (error) {
+            console.error('Error injecting navigation:', error);
+        }
     }
 
     /**
@@ -129,8 +147,12 @@ class SharedNavigation {
 
 // Global function to inject navigation
 function injectSharedNavigation() {
-    const navigation = new SharedNavigation();
-    navigation.inject();
+    try {
+        const navigation = new SharedNavigation();
+        navigation.inject();
+    } catch (error) {
+        console.error('Error in injectSharedNavigation:', error);
+    }
 }
 
 // Auto-inject if this script is loaded
