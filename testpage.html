@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Azael Montejo Jr.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Shared Navigation Script -->
+    <script src="./scripts/navigation.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .prose p {
+            margin-bottom: 1em;
+        }
+        .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            font-weight: 600;
+        }
+        .blog-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .blog-card:hover {
+            transform: scale(1.01);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .blog-title {
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.75rem;
+        }
+        .blog-meta {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+        .blog-excerpt {
+            color: #374151;
+            line-height: 1.625;
+            margin-bottom: 1.5rem;
+        }
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .read-more:hover {
+            color: #1d4ed8;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation will be injected here by the shared navigation script -->
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 flex-grow">
+        <h1 class="text-5xl font-extrabold text-center mb-12 text-gray-900 leading-tight">My Latest Insights</h1>
+        
+        <!-- Blog Posts -->
+        <div class="space-y-8">
+            <!-- Blog Post 1 -->
+            <article class="blog-card">
+                <h2 class="blog-title">My Thesis is the Bridge: Why I'm Pursuing Both Computer Science and Civil Justice</h2>
+                <p class="blog-meta">July 31, 2025 | Education, Social Impact, Personal Journey</p>
+                <p class="blog-excerpt">
+                    The late July air hangs thick and sweet over the Princeton campus, a world I still navigate with a quiet sense of wonder. It's been nine weeks since I first stepped onto these hallowed grounds, and the transformation I've undergone is nothing short of profound. But this isn't just about academic achievement—it's about the bridge I'm building between two worlds that, for too long, have existed in parallel universes.
+                </p>
+                <a href="posts/my-thesis-is-the-bridge.html" class="read-more">
+                    Read More
+                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+            </article>
+
+            <!-- Blog Post 2 -->
+            <article class="blog-card">
+                <h2 class="blog-title">The Day the Ocean Taught Me What a Hero Really Is</h2>
+                <p class="blog-meta">January 2025 | Personal Journey, Leadership, Life Lessons</p>
+                <p class="blog-excerpt">
+                    The air over Will Rogers Beach held the sweet, briny scent of salt and the distant thunder of a hurricane that was a thousand miles away, yet its voice was already a roar in our ears. I was a Junior Lifeguard Cadet, a title that carried the weight of a kingdom in my young hands. At fourteen, I thought I knew what it meant to be a hero—until the ocean taught me otherwise.
+                </p>
+                <a href="posts/the-day-the-ocean-taught-me.html" class="read-more">
+                    Read More
+                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+            </article>
+
+            <!-- Blog Post 3 -->
+            <article class="blog-card">
+                <h2 class="blog-title">The Day I Collaborated on My Professor's Passion Project</h2>
+                <p class="blog-meta">July 31, 2025 | Research, Collaboration, Mentorship</p>
+                <p class="blog-excerpt">
+                    The Princeton campus, with its hushed Gothic spires and centuries of ingrained intellect, has been my world for nine weeks now. But today was different. Today, I wasn't just a student—I was a collaborator. I was working on my professor's passion project, and the experience was nothing short of transformative.
+                </p>
+                <a href="posts/professor-passion-project.html" class="read-more">
+                    Read More
+                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12 rounded-t-lg">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-300">&copy; 2025 Azael Montejo Jr. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="https://www.linkedin.com/in/azael-montejo-jr" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300">LinkedIn</a>
+                <a href="https://www.instagram.com/azaelmontejojr" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300">Instagram</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

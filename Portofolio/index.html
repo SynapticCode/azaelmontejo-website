@@ -7,7 +7,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Shared Navigation Script -->
+    <script src="../scripts/navigation.js"></script>
+    
     <style>
         /* --- STYLE CORRECTIONS --- */
         body {
@@ -67,32 +72,7 @@
     </style>
 </head>
 <body class="antialiased">
-
-    <!-- Header & Navigation -->
-    <header class="bg-black/50 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-800">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div>
-                <a href="https://azaelmontejo.com" class="text-xl font-bold text-white link-hover">Azael Montejo</a>
-                <span class="text-orange-500 font-mono text-lg ml-2">/ Showcase</span>
-            </div>
-            <div class="hidden md:flex items-center space-x-6 text-sm">
-                <a href="https://azaelmontejo.com" class="text-gray-300 link-hover">Home</a>
-                <a href="https://azaelmontejo.com/EXOBOUND/" class="text-gray-300 link-hover">EXOBOUND</a>
-                <a href="https://azaelmontejo.com/blog" class="text-gray-300 link-hover">Blog</a>
-            </div>
-             <div class="md:hidden">
-                <button id="menu-btn" class="text-white focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                </button>
-            </div>
-        </nav>
-         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="https://azaelmontejo.com" class="block py-2 text-gray-300 link-hover">Home</a>
-            <a href="https://azaelmontejo.com/EXOBOUND/" class="block py-2 text-gray-300 link-hover">EXOBOUND</a>
-            <a href="https://azaelmontejo.com/blog" class="block py-2 text-gray-300 link-hover">Blog</a>
-        </div>
-    </header>
+    <!-- Navigation will be injected here by the shared navigation script -->
 
     <!-- Main Content -->
     <main class="container mx-auto px-6 py-12 md:py-20">

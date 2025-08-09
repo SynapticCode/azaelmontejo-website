@@ -14,10 +14,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="/styles/main.css">
-
+    
+    <!-- Shared Navigation Script -->
+    <script src="./scripts/navigation.js"></script>
+    
     <style>
         body {
             background-color: #000005;
@@ -136,42 +139,7 @@
     </style>
 </head>
 <body class="antialiased">
-    <div id="landingOverlay" class="landing-overlay">
-        <h1 class="hero-headline">Decoding the Algorithm of Ambition.</h1>
-        <h2 class="hero-name">Azael Montejo Jr.</h2>
-        <h3 class="hero-sub">How computational insights are unlocking the architecture of human potential.</h3>
-        <button id="enterEcosystemBtn" class="btn-ecosystem">Enter The Ecosystem</button>
-    </div>
-
-    <!-- Navigation Bar (add Portfolio link) -->
-    <nav class="w-full flex items-center justify-between px-6 py-4 bg-black/60 sticky top-0 z-50 border-b border-slate-800">
-        <div>
-            <a href="/" class="text-xl font-bold text-white link-hover">Azael Montejo</a>
-        </div>
-        <div class="hidden md:flex items-center space-x-6 text-sm">
-            <a href="/" class="text-gray-300 link-hover">Home</a>
-            <a href="/EXOBOUND/" class="text-gray-300 link-hover">EXOBOUND</a>
-            <a href="/Portfolio/" class="text-orange-400 font-bold link-hover">Portfolio</a>
-                                    <a href="/blog/" class="text-gray-300 link-hover">Blog</a>
-            <a href="/connect" class="text-gray-300 link-hover">Connect</a>
-        </div>
-        <div class="md:hidden">
-            <button id="menu-btn" class="text-white focus:outline-none">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </div>
-    </nav>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-black/90 border-b border-slate-800">
-        <a href="/" class="block py-2 text-gray-300 link-hover">Home</a>
-        <a href="/EXOBOUND/" class="block py-2 text-gray-300 link-hover">EXOBOUND</a>
-        <a href="/Portfolio/" class="block py-2 text-orange-400 font-bold link-hover flex items-center gap-2" style="font-size:1.2em;">
-            <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            Portfolio
-        </a>
-                            <a href="/blog/" class="block py-2 text-gray-300 link-hover">Blog</a>
-        <a href="/connect" class="block py-2 text-gray-300 link-hover">Connect</a>
-    </div>
+    <!-- Navigation will be injected here by the shared navigation script -->
 
     <!-- Section 1: The Hook (Hero Section) -->
     <section id="hero" class="h-screen min-h-[700px] flex flex-col items-center justify-center text-center p-4">
