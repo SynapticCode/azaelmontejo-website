@@ -5,13 +5,37 @@
 
 class SharedNavigation {
     constructor() {
+        // Get the base path for the current page
+        this.basePath = this.getBasePath();
+        
         this.navItems = [
-            { href: '/', text: 'Home', id: 'home' },
-            { href: '/EXOBOUND/', text: 'EXOBOUND', id: 'exobound' },
-            { href: '/Portfolio/', text: 'Portfolio', id: 'portfolio' },
-            { href: '/blog/', text: 'Blog', id: 'blog' },
-            { href: '/connect', text: 'Connect', id: 'connect' }
+            { href: this.basePath + 'index.html', text: 'Home', id: 'home' },
+            { href: this.basePath + 'EXOBOUND/', text: 'EXOBOUND', id: 'exobound' },
+            { href: this.basePath + 'Portfolio/', text: 'Portfolio', id: 'portfolio' },
+            { href: this.basePath + 'blog/', text: 'Blog', id: 'blog' },
+            { href: this.basePath + 'connect/', text: 'Connect', id: 'connect' }
         ];
+    }
+
+    /**
+     * Get the base path for the current page
+     */
+    getBasePath() {
+        const path = window.location.pathname;
+        const pathSegments = path.split('/').filter(segment => segment.length > 0);
+        
+        // If we're in a subdirectory, we need to go up
+        if (pathSegments.length > 1) {
+            // Remove the current page/directory from the path
+            pathSegments.pop();
+            return '/' + pathSegments.join('/') + '/';
+        } else if (pathSegments.length === 1) {
+            // We're in a subdirectory, need to go up one level
+            return '/';
+        } else {
+            // We're at the root
+            return '/';
+        }
     }
 
     /**
@@ -19,17 +43,18 @@ class SharedNavigation {
      */
     getCurrentPage() {
         const path = window.location.pathname;
-        const filename = window.location.pathname.split('/').pop();
+        const pathSegments = path.split('/').filter(segment => segment.length > 0);
+        const currentSegment = pathSegments[pathSegments.length - 1] || '';
         
         // Handle test page
-        if (filename === 'testpage.html') return 'connect';
+        if (currentSegment === 'testpage.html') return 'connect';
         
         // Handle main pages
-        if (path === '/' || path === '/index.html' || filename === 'index.html') return 'home';
-        if (path.includes('/EXOBOUND') || filename.includes('exobound')) return 'exobound';
-        if (path.includes('/Portfolio') || filename.includes('portfolio')) return 'portfolio';
-        if (path.includes('/blog') || filename.includes('blog')) return 'blog';
-        if (path.includes('/connect') || filename.includes('connect')) return 'connect';
+        if (path === '/' || path === '/index.html' || currentSegment === 'index.html' || currentSegment === '') return 'home';
+        if (path.includes('/EXOBOUND') || currentSegment.includes('exobound')) return 'exobound';
+        if (path.includes('/Portfolio') || currentSegment.includes('portfolio')) return 'portfolio';
+        if (path.includes('/blog') || currentSegment.includes('blog')) return 'blog';
+        if (path.includes('/connect') || currentSegment.includes('connect')) return 'connect';
         
         return 'home';
     }
@@ -39,43 +64,26 @@ class SharedNavigation {
      */
     generateNavigationHTML() {
         const currentPage = this.getCurrentPage();
-        const basePath = this.getBasePath();
         
         const navItemsHTML = this.navItems.map(item => {
             const isActive = item.id === currentPage;
             const activeClass = isActive ? 'text-orange-400 font-bold' : 'text-gray-300';
             
-            // Fix: Properly handle path concatenation
-            let href = item.href;
-            if (item.href.startsWith('/')) {
-                // Remove leading slash and concatenate with basePath
-                const cleanHref = item.href.substring(1);
-                href = basePath + cleanHref;
-            }
-            
-            return `<a href="${href}" class="${activeClass} link-hover">${item.text}</a>`;
+            return `<a href="${item.href}" class="${activeClass} link-hover">${item.text}</a>`;
         }).join('');
 
         const mobileNavItemsHTML = this.navItems.map(item => {
             const isActive = item.id === currentPage;
             const activeClass = isActive ? 'text-orange-400 font-bold' : 'text-gray-300';
             
-            // Fix: Properly handle path concatenation
-            let href = item.href;
-            if (item.href.startsWith('/')) {
-                // Remove leading slash and concatenate with basePath
-                const cleanHref = item.href.substring(1);
-                href = basePath + cleanHref;
-            }
-            
-            return `<a href="${href}" class="block py-2 ${activeClass} link-hover">${item.text}</a>`;
+            return `<a href="${item.href}" class="block py-2 ${activeClass} link-hover">${item.text}</a>`;
         }).join('');
 
         return `
             <!-- Navigation Bar -->
             <nav class="w-full flex items-center justify-between px-6 py-4 bg-black/60 sticky top-0 z-50 border-b border-slate-800">
                 <div>
-                    <a href="${basePath}" class="text-xl font-bold text-white link-hover">Azael Montejo</a>
+                    <a href="${this.basePath}index.html" class="text-xl font-bold text-white link-hover">Azael Montejo</a>
                 </div>
                 <div class="hidden md:flex items-center space-x-6 text-sm">
                     ${navItemsHTML}
@@ -96,35 +104,33 @@ class SharedNavigation {
     }
 
     /**
-     * Get the base path for relative links
-     */
-    getBasePath() {
-        const path = window.location.pathname;
-        const segments = path.split('/').filter(segment => segment);
-        
-        // If we're in a subdirectory, we need to go up
-        if (segments.length > 1) {
-            return '../'.repeat(segments.length - 1);
-        }
-        
-        return './';
-    }
-
-    /**
      * Inject the navigation into the page
      */
     inject() {
         try {
+            // Check if navigation already exists to prevent duplicate injection
+            if (document.querySelector('nav')) {
+                console.log('Navigation already exists, skipping injection');
+                return;
+            }
+
             const navigationHTML = this.generateNavigationHTML();
             
             // Find the body element
             const body = document.body;
+            
+            if (!body) {
+                console.error('Body element not found');
+                return;
+            }
             
             // Insert navigation at the beginning of the body
             body.insertAdjacentHTML('afterbegin', navigationHTML);
             
             // Add mobile menu functionality
             this.setupMobileMenu();
+            
+            console.log('Navigation injected successfully');
         } catch (error) {
             console.error('Error injecting navigation:', error);
         }
