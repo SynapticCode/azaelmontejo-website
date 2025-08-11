@@ -8,10 +8,6 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <!-- Shared Navigation Script -->
-    <script src="../scripts/navigation.js"></script>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body {
@@ -68,6 +64,26 @@
             },
         ];
 
+        // Header Component
+        const Header = () => {
+            return (
+                <header className="bg-white shadow-md py-4 rounded-b-lg">
+                    <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+                        <a href="https://azaelmontejo.com" className="text-2xl font-bold text-gray-800 rounded-lg p-2 hover:bg-gray-100 transition duration-300">Azael Montejo Jr.</a>
+                        <nav className="mt-4 md:mt-0">
+                            <ul className="flex flex-wrap justify-center space-x-4 md:space-x-8">
+                                <li><a href="https://azaelmontejo.com" className="text-gray-600 hover:text-blue-600 font-medium rounded-lg p-2 transition duration-300">Home</a></li>
+                                <li><a href="https://azaelmontejo.com/EXOBOUND/" className="text-gray-600 hover:text-blue-600 font-medium rounded-lg p-2 transition duration-300">EXOBOUND</a></li>
+                                <li><a href="https://azaelmontejo.com/Portfolio/" className="text-gray-600 hover:text-blue-600 font-medium rounded-lg p-2 transition duration-300">Portfolio</a></li>
+                                <li><a href="https://azaelmontejo.com/connect" className="text-gray-600 hover:text-blue-600 font-medium rounded-lg p-2 transition duration-300">Connect</a></li>
+                                <li><a href="#" className="text-blue-600 font-bold rounded-lg p-2 bg-blue-50 hover:bg-blue-100 transition duration-300">Blog</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+            );
+        };
+
         // Blog Post Card Component
         const BlogPostCard = ({ title, date, category, excerpt, externalLink }) => {
             return (
@@ -107,7 +123,7 @@
         const App = () => {
             return (
                 <div className="min-h-screen bg-gray-50 flex flex-col">
-                    {/* Navigation will be injected here by the shared navigation script */}
+                    <Header />
 
                     <main className="container mx-auto px-4 py-12 flex-grow">
                         <h1 className="text-5xl font-extrabold text-center mb-12 text-gray-900 leading-tight">My Latest Insights</h1>

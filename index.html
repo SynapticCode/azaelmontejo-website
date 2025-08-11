@@ -73,25 +73,7 @@
         .hero-sub {
             color: #f3f3f3 !important;
         }
-        .landing-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            width: 100vw; height: 100vh;
-            background: #000005;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.7s;
-        }
-        .landing-overlay.hide {
-            opacity: 0;
-            pointer-events: none;
-        }
-        body.landing-locked {
-            overflow: hidden;
-        }
+
         @keyframes pulse {
             0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(79, 0, 188, 0.7); }
             50% { transform: scale(1.1); box-shadow: 0 0 10px 10px rgba(79, 0, 188, 0); }
@@ -136,6 +118,52 @@
             overflow: hidden;
             transition: max-height 0.5s ease-in-out, margin-top 0.5s ease-in-out;
         }
+        
+        /* Add missing CSS classes */
+        .btn-ecosystem {
+            display: inline-block;
+            background: linear-gradient(90deg, #2d1a4a 0%, #4F00BC 100%);
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 0.85rem 2.5rem;
+            border-radius: 9999px;
+            margin: 2.5rem auto 0 auto;
+            box-shadow: 0 4px 24px rgba(79,0,188,0.15);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .btn-ecosystem:hover {
+            background: linear-gradient(90deg, #4F00BC 0%, #2d1a4a 100%);
+            color: #fff;
+            box-shadow: 0 6px 32px rgba(79,0,188,0.18);
+            transform: translateY(-2px);
+        }
+        .jump {
+            animation: jump 0.6s ease-out;
+        }
+        @keyframes jump {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .card-title { color: #fff !important; }
+        .card-body { color: #e0e0e0 !important; }
+        .card-link { color: #ff7f0e !important; }
+        .card-link:hover { color: #ff7f0e !important; text-decoration: underline; }
+        .link-hover { transition: color 0.2s; }
+        .link-hover:hover { color: #ff7f0e !important; }
+        
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Ensure proper scrolling behavior */
+        body {
+            overflow-x: hidden;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -150,7 +178,7 @@
             <div class="flex justify-center my-12">
                 <div class="pulse-element"></div>
             </div>
-            <a href="#pillars" class="btn-ecosystem">Enter The Ecosystem</a>
+            <a href="#pillars" class="btn-ecosystem" onclick="scrollToSection('pillars')">Enter The Ecosystem</a>
         </div>
     </section>
 
@@ -295,23 +323,6 @@
     <audio id="welcome-audio" src="assets/welcome.mp3" preload="auto"></audio>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            const elementsToAnimate = document.querySelectorAll('.fade-in-up');
-            elementsToAnimate.forEach(el => {
-                observer.observe(el);
-            });
-        });
-
         function toggleProjectDetails(projectId) {
             const detailsDiv = document.getElementById(projectId);
             if (detailsDiv.style.maxHeight && detailsDiv.style.maxHeight !== '0px') {
@@ -323,60 +334,49 @@
             }
         }
 
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const offsetTop = section.offsetTop - 80; // Account for fixed navigation
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
         // Enhance Enter The Ecosystem button with sound and jump effect
         function playWelcomeSoundAndJump(btn) {
             const audio = document.getElementById('welcome-audio');
             if (audio) {
                 audio.currentTime = 0;
-                audio.play();
+                audio.play().catch(e => console.log('Audio play failed:', e));
             }
             btn.classList.remove('jump');
             void btn.offsetWidth; // trigger reflow for animation
             btn.classList.add('jump');
         }
+
         document.addEventListener('DOMContentLoaded', function() {
-            // DETECT IF USER IS A CRAWLER
-            var isCrawler = /bot|crawler|spider|crawling/i.test(navigator.userAgent);
-            
-            if (isCrawler) {
-                // FOR CRAWLERS: Skip overlay entirely
-                document.body.classList.remove('landing-locked');
-                var overlay = document.getElementById('landingOverlay');
-                overlay.style.display = 'none';
-            } else {
-                // FOR HUMANS: Show overlay as normal
-                var overlay = document.getElementById('landingOverlay');
-                var btn = document.getElementById('enterEcosystemBtn');
-                document.body.classList.add('landing-locked');
-                
-                btn.addEventListener('click', function() {
-                    playWelcomeSoundAndJump(btn);
-                    overlay.classList.add('hide');
-                    setTimeout(function() {
-                        overlay.style.display = 'none';
-                        document.body.classList.remove('landing-locked');
-                    }, 700);
-                });
-            }
-            
-            // Also enhance hero section button
+            // Enhance hero section button
             var heroBtn = document.querySelector('a.btn-ecosystem[href="#pillars"]');
             if (heroBtn) {
                 heroBtn.addEventListener('click', function(e) {
                     playWelcomeSoundAndJump(heroBtn);
                 });
             }
-        });
-
-        // Mobile menu toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            var menuBtn = document.getElementById('menu-btn');
-            var mobileMenu = document.getElementById('mobile-menu');
-            menuBtn.addEventListener('click', function() {
-                mobileMenu.classList.toggle('hidden');
+            
+            // Enhance other ecosystem buttons
+            var ecosystemBtns = document.querySelectorAll('.btn-ecosystem');
+            ecosystemBtns.forEach(btn => {
+                if (btn !== heroBtn) {
+                    btn.addEventListener('click', function(e) {
+                        playWelcomeSoundAndJump(btn);
+                    });
+                }
             });
         });
     </script>
-    <script src="/scripts/main.js" type="module"></script>
+    <script src="./scripts/main.js" type="module"></script>
 </body>
 </html>
