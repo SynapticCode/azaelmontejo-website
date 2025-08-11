@@ -9,6 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <!-- Shared Navigation Script -->
+    <script src="../../scripts/navigation.js"></script>
+
     <style>
         /* Custom Styles */
         body {
@@ -66,7 +70,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 relative overflow-x-hidden">
+<body class="p-4 sm:p-6 lg:p-8 relative overflow-x-hidden">
     <div class="art-accent"></div>
 
     <main class="w-full max-w-4xl z-10">
@@ -366,15 +370,7 @@
             
             // Collect form data
             const formData = new FormData(form);
-            const templateParams = {
-                submission_time: submissionTime
-            };
             
-            // Add all form fields to template params
-            for (const [key, value] of formData.entries()) {
-                templateParams[key] = value;
-            }
-
             // Collect PAR-Q responses
             const parqResponses = [];
             for (let i = 1; i <= 7; i++) {
@@ -387,17 +383,88 @@
                     parqResponses.push(`Question ${i}: Not answered`);
                 }
             }
-            templateParams.parq_responses = parqResponses.join('\n');
+            
+            // Format all responses into a comprehensive message
+            let messageContent = `NEW FITNESS CLIENT QUESTIONNAIRE\n`;
+            messageContent += `Submitted: ${submissionTime}\n\n`;
+            
+            messageContent += `BASIC INFORMATION:\n`;
+            messageContent += `Name: ${formData.get('client_name')}\n`;
+            messageContent += `Email: ${formData.get('client_email')}\n`;
+            messageContent += `Occupation: ${formData.get('occupation')}\n`;
+            messageContent += `Age: ${formData.get('age')}\n\n`;
+            
+            messageContent += `PAR-Q RESPONSES:\n${parqResponses.join('\n')}\n\n`;
+            
+            messageContent += `PRIMARY GOAL:\n${formData.get('goals_primary')}\n\n`;
+            
+            if (formData.get('goals_secondary')) {
+                messageContent += `SECONDARY GOALS:\n${formData.get('goals_secondary')}\n\n`;
+            }
+            
+            messageContent += `MOTIVATION:\n${formData.get('motivation_core')}\n\n`;
+            
+            if (formData.get('health_pain')) {
+                messageContent += `CURRENT PAIN/ACHES:\n${formData.get('health_pain')}\n\n`;
+            }
+            
+            if (formData.get('health_history')) {
+                messageContent += `PAST INJURIES/SURGERIES:\n${formData.get('health_history')}\n\n`;
+            }
+            
+            if (formData.get('health_conditions')) {
+                messageContent += `MEDICAL CONDITIONS:\n${formData.get('health_conditions')}\n\n`;
+            }
+            
+            if (formData.get('experience_past')) {
+                messageContent += `FITNESS HISTORY:\n${formData.get('experience_past')}\n\n`;
+            }
+            
+            if (formData.get('experience_preferences')) {
+                messageContent += `ACTIVITY PREFERENCES:\n${formData.get('experience_preferences')}\n\n`;
+            }
+            
+            messageContent += `TRAINING LOGISTICS:\n`;
+            messageContent += `Days per week: ${formData.get('logistics_days')}\n`;
+            messageContent += `Time per session: ${formData.get('logistics_time')}\n`;
+            messageContent += `Equipment: ${formData.get('logistics_equipment')}\n\n`;
+            
+            if (formData.get('lifestyle_sleep')) {
+                messageContent += `SLEEP:\n${formData.get('lifestyle_sleep')}\n\n`;
+            }
+            
+            if (formData.get('lifestyle_nutrition')) {
+                messageContent += `NUTRITION:\n${formData.get('lifestyle_nutrition')}\n\n`;
+            }
+            
+            if (formData.get('lifestyle_stress')) {
+                messageContent += `STRESS & RECOVERY:\n${formData.get('lifestyle_stress')}\n\n`;
+            }
+            
+            const templateParams = {
+                name: formData.get('client_name'),
+                email: formData.get('client_email'),
+                subject: `New Fitness Client: ${formData.get('client_name')}`,
+                message: messageContent
+            };
 
             // Send email using EmailJS
-            emailjs.send('service_82rjmql', 'template_t6fxler', templateParams)
+            emailjs.send('service_0di3jju', 'template_ohrrhbb', templateParams)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
                     document.getElementById('questionnaire').classList.add('hidden');
                     document.getElementById('thank-you').classList.remove('hidden');
                 }, function(error) {
                     console.log('FAILED...', error);
-                    statusMessage.innerHTML = `<div class="error-message">✗ There was an error. Please try again or contact me directly.</div>`;
+                    let errorDetails = 'Unknown error occurred';
+                    if (error.text) {
+                        errorDetails = error.text;
+                    } else if (error.message) {
+                        errorDetails = error.message;
+                    } else if (error.status) {
+                        errorDetails = `HTTP ${error.status}: ${error.statusText || 'Request failed'}`;
+                    }
+                    statusMessage.innerHTML = `<div class="error-message">✗ Email failed to send. Error: ${errorDetails}</div>`;
                     statusMessage.classList.remove('hidden');
                     window.scrollTo(0,0);
                 })
