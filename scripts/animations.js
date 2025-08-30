@@ -1,11 +1,11 @@
-// Animations module: fade-in-up elements appear/disappear on scroll
+// Animations module: fade-in-up elements appear on scroll
 export function initAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-      } else {
-        entry.target.classList.remove('visible');
+        // Stop observing after the element becomes visible
+        observer.unobserve(entry.target);
       }
     });
   }, {
@@ -16,4 +16,4 @@ export function initAnimations() {
   elementsToAnimate.forEach(el => {
     observer.observe(el);
   });
-} 
+}
