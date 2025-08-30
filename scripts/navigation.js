@@ -7,17 +7,18 @@ class SharedNavigation {
     constructor() {
         this.navItems = [
             { href: '/', text: 'Home', id: 'home' },
-            { href: '/EXOBOUND/', text: 'EXOBOUND', id: 'exobound' },
+            { href: '/exobound-research', text: 'EXOBOUND', id: 'exobound' },
             { href: '/Portfolio/', text: 'Portfolio', id: 'portfolio' },
             { href: '/blog/', text: 'Blog', id: 'blog' },
             { href: '/connect/', text: 'Connect', id: 'connect' }
         ];
         
-        // Initialize navigation when DOM is ready
+        // Use requestAnimationFrame to ensure DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.init());
         } else {
-            this.init();
+            // If DOM is already loaded, wait for the next tick to ensure all elements are available
+            setTimeout(() => this.init(), 0);
         }
     }
     
@@ -91,17 +92,24 @@ class SharedNavigation {
      * Inject the navigation into the page
      */
     inject() {
+        // Try to inject immediately
+        this.attemptInjection();
+        
+        // Also set a timeout as a fallback in case the DOM isn't fully ready
+        setTimeout(() => this.attemptInjection(), 100);
+    }
+    
+    attemptInjection() {
         try {
             const navContainer = document.getElementById('navigation-container');
             if (!navContainer) {
-                console.error('Navigation container not found');
-                return;
+                console.warn('Navigation container not found, will retry...');
+                return false;
             }
             
             // Check if navigation already exists to prevent duplicate injection
             if (navContainer.querySelector('nav')) {
-                console.log('Navigation already exists, skipping injection');
-                return;
+                return true;
             }
 
             const navigationHTML = this.injectNavigation();
@@ -110,9 +118,10 @@ class SharedNavigation {
             // Setup event listeners
             this.setupEventListeners();
             
-            console.log('Navigation injected successfully');
+            return true;
         } catch (error) {
             console.error('Error injecting navigation:', error);
+            return false;
         }
     }
 
