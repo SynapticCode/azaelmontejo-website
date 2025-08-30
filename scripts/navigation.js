@@ -9,11 +9,11 @@ class SharedNavigation {
         this.basePath = this.getBasePath();
         
         this.navItems = [
-            { href: this.basePath + 'index.html', text: 'Home', id: 'home' },
-            { href: this.basePath + 'EXOBOUND/', text: 'EXOBOUND', id: 'exobound' },
-            { href: this.basePath + 'Portfolio/', text: 'Portfolio', id: 'portfolio' },
-            { href: this.basePath + 'blog/', text: 'Blog', id: 'blog' },
-            { href: this.basePath + 'connect/', text: 'Connect', id: 'connect' }
+            { href: '/', text: 'Home', id: 'home' },
+            { href: '/EXOBOUND/', text: 'EXOBOUND', id: 'exobound' },
+            { href: '/Portfolio/', text: 'Portfolio', id: 'portfolio' },
+            { href: '/blog/', text: 'Blog', id: 'blog' },
+            { href: '/connect/', text: 'Connect', id: 'connect' }
         ];
     }
 
@@ -23,6 +23,11 @@ class SharedNavigation {
     getBasePath() {
         const path = window.location.pathname;
         const pathSegments = path.split('/').filter(segment => segment.length > 0);
+        
+        // If we're in a blog post
+        if (path.includes('blog/posts/')) {
+            return '/blog/';
+        }
         
         // If we're in a subdirectory, we need to go up
         if (pathSegments.length > 1) {
@@ -109,23 +114,22 @@ class SharedNavigation {
     inject() {
         try {
             // Check if navigation already exists to prevent duplicate injection
-            if (document.querySelector('nav')) {
+            const existingNav = document.querySelector('nav');
+            const navContainer = document.getElementById('navigation') || document.body;
+            
+            if (existingNav && navContainer !== document.body) {
                 console.log('Navigation already exists, skipping injection');
                 return;
             }
 
             const navigationHTML = this.generateNavigationHTML();
             
-            // Find the body element
-            const body = document.body;
-            
-            if (!body) {
-                console.error('Body element not found');
-                return;
+            // If we have a navigation container, use it, otherwise prepend to body
+            if (navContainer) {
+                navContainer.innerHTML = navigationHTML;
+            } else {
+                document.body.insertAdjacentHTML('afterbegin', navigationHTML);
             }
-            
-            // Insert navigation at the beginning of the body
-            body.insertAdjacentHTML('afterbegin', navigationHTML);
             
             // Add mobile menu functionality
             this.setupMobileMenu();

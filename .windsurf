@@ -1,0 +1,9 @@
+{
+  "git": {
+    "branch": "main",
+    "remote": "origin",
+    "autoPush": true,
+    "autoPull": true
+  },
+  "version": "1.0.0"
+}
