@@ -18,8 +18,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Shared Navigation Script -->
-    <script src="./scripts/navigation.js"></script>
+    <!-- Shared Navigation Script (defer to ensure DOM is loaded) -->
+    <script src="./scripts/navigation.js" defer></script>
     
     <style>
         body {
@@ -167,7 +167,8 @@
     </style>
 </head>
 <body class="antialiased">
-    <!-- Navigation will be injected here by the shared navigation script -->
+    <!-- Navigation Container -->
+    <div id="navigation-container"></div>
 
     <!-- Section 1: The Hook (Hero Section) -->
     <section id="hero" class="h-screen min-h-[700px] flex flex-col items-center justify-center text-center p-4">
