@@ -1,0 +1,30 @@
+/* Debug styles to make content visible */
+body {
+    background-color: #000005 !important;
+    color: #e0e0e0 !important;
+}
+
+section {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.fade-in-up, 
+.fade-in-up.visible,
+.card-body,
+.card-title,
+.hero-title,
+.hero-sub {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+}
+
+/* Make sure all content is visible */
+* {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+}

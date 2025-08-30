@@ -13,9 +13,27 @@
     --font-heading: 'Space Grotesk', sans-serif;
 }
 body {
-    background-color: var(--color-bg);
-    color: var(--color-offwhite);
-    font-family: var(--font-main);
+    background-color: var(--color-bg) !important;
+    color: var(--color-offwhite) !important;
+    font-family: var(--font-main) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+* {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+section {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative !important;
+    height: auto !important;
+    width: auto !important;
+    overflow: visible !important;
+    clip: auto !important;
+    clip-path: none !important;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
