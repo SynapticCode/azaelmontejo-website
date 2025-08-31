@@ -115,7 +115,7 @@ class SharedNavigation {
             console.error('Error injecting navigation:', error);
         }
     }
-
+    
     setupEventListeners() {
         // Mobile menu toggle
         const menuBtn = document.getElementById('menu-btn');

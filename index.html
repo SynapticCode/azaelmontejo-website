@@ -18,6 +18,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- Load main CSS file -->
+    <link rel="stylesheet" href="styles/main.css">
+    
     <!-- Load navigation script first -->
     <script src="./scripts/navigation.js"></script>
     
@@ -33,6 +36,14 @@
             const fadeElements = document.querySelectorAll('.fade-in-up');
             fadeElements.forEach(element => {
                 element.classList.add('visible');
+            });
+            
+            // Ensure all content sections are visible
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.style.display = 'block';
+                section.style.opacity = '1';
+                section.style.visibility = 'visible';
             });
         });
     </script>

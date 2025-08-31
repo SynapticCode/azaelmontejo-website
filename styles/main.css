@@ -12,33 +12,24 @@
     --font-main: 'Inter', sans-serif;
     --font-heading: 'Space Grotesk', sans-serif;
 }
+
 body {
     background-color: var(--color-bg) !important;
     color: var(--color-offwhite) !important;
     font-family: var(--font-main) !important;
-    opacity: 1 !important;
-    visibility: visible !important;
 }
-* {
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
-}
+
 section {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    position: relative !important;
-    height: auto !important;
-    width: auto !important;
-    overflow: visible !important;
-    clip: auto !important;
-    clip-path: none !important;
+    display: block;
+    opacity: 1;
+    visibility: visible;
 }
+
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     color: var(--color-white);
 }
+
 .cosmic-indigo { color: var(--color-orange); }
 .bg-cosmic-indigo { background-color: var(--color-orange); }
 .border-cosmic-indigo { border-color: var(--color-orange); }
@@ -221,4 +212,4 @@ a:hover, .card-link:hover {
 /* Unify all section and card backgrounds to the same dark purple as 'The Journey' */
 .bg-white, .bg-gray-50, .rounded-lg, .shadow-sm, section, footer {
     background-color: var(--color-bg) !important;
-} 
+}
