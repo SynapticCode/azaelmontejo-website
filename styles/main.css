@@ -25,6 +25,26 @@ section {
     visibility: visible;
 }
 
+/* Hero section specific positioning - prevent layout shift */
+#hero {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Account for navigation height and ensure true centering */
+    min-height: 100vh !important;
+    height: 100vh !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    margin-top: -80px !important; /* Offset navigation height */
+    padding-top: 80px !important; /* Add padding to prevent content overlap */
+    /* Prevent any layout shifts */
+    box-sizing: border-box !important;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     color: var(--color-white);
@@ -152,11 +172,11 @@ body.landing-locked {
 }
 /* Button Glow & Jump Animation */
 .btn-ecosystem {
-    background: var(--color-purple-dark);
+    background: linear-gradient(90deg, var(--color-purple-dark) 0%, var(--color-purple) 100%);
     color: var(--color-white);
     border: 2px solid var(--color-purple);
-    box-shadow: 0 0 0 0 var(--color-purple-bright);
-    transition: box-shadow 0.3s, transform 0.1s, background 0.2s, color 0.2s;
+    box-shadow: 0 4px 24px rgba(79,0,188,0.15);
+    transition: all 0.3s ease;
     font-weight: 600;
     font-size: 1.2rem;
     padding: 0.85rem 2.5rem;
@@ -165,12 +185,33 @@ body.landing-locked {
     cursor: pointer;
     outline: none;
     display: inline-block;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
 }
+
+.btn-ecosystem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s;
+}
+
 .btn-ecosystem:hover {
-    box-shadow: 0 0 24px 6px var(--color-purple-bright);
-    background: var(--color-purple);
+    background: linear-gradient(90deg, var(--color-purple) 0%, var(--color-purple-dark) 100%);
+    box-shadow: 0 0 30px 8px var(--color-purple-bright), 0 6px 32px rgba(79,0,188,0.25);
     color: var(--color-white);
+    transform: translateY(-2px);
 }
+
+.btn-ecosystem:hover::before {
+    left: 100%;
+}
+
 .btn-ecosystem:active {
     transform: scale(0.95) translateY(2px);
     box-shadow: 0 0 32px 12px var(--color-purple-bright);

@@ -18,8 +18,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Load main CSS file -->
-    <link rel="stylesheet" href="styles/main.css">
+    <!-- Load main CSS file with cache busting -->
+    <link rel="stylesheet" href="./styles/main.css?v=3">
     
     <!-- Load navigation script first -->
     <script src="./scripts/navigation.js"></script>
@@ -32,19 +32,27 @@
                 window.sharedNavigation = new SharedNavigation();
             }
             
-            // Make sure all fade-in-up elements are visible
-            const fadeElements = document.querySelectorAll('.fade-in-up');
-            fadeElements.forEach(element => {
-                element.classList.add('visible');
+            // Hide all content sections initially except hero
+            const sections = document.querySelectorAll('section:not(#hero), footer');
+            sections.forEach(section => {
+                section.style.display = 'none';
+                section.style.opacity = '0';
+                section.style.visibility = 'hidden';
             });
             
-            // Ensure all content sections are visible
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => {
-                section.style.display = 'block';
-                section.style.opacity = '1';
-                section.style.visibility = 'visible';
-            });
+            // Force hero section to maintain centering after navigation loads
+            const heroSection = document.getElementById('hero');
+            if (heroSection) {
+                heroSection.style.display = 'flex';
+                heroSection.style.alignItems = 'center';
+                heroSection.style.justifyContent = 'center';
+                heroSection.style.height = '100vh';
+                heroSection.style.minHeight = '100vh';
+                heroSection.style.marginTop = '-80px';
+                heroSection.style.paddingTop = '80px';
+                heroSection.style.opacity = '1';
+                heroSection.style.visibility = 'visible';
+            }
         });
     </script>
     
@@ -206,7 +214,7 @@
             <div class="flex justify-center my-12">
                 <div class="pulse-element"></div>
             </div>
-            <a href="#pillars" class="btn-ecosystem" onclick="scrollToSection('pillars')">Enter The Ecosystem</a>
+            <a href="#pillars" class="btn-ecosystem" onclick="enterEcosystem()">Enter The Ecosystem</a>
         </div>
     </section>
 
@@ -371,6 +379,39 @@
                     behavior: 'smooth'
                 });
             }
+        }
+
+        function enterEcosystem() {
+            // Show all hidden sections with animation
+            const sections = document.querySelectorAll('section:not(#hero), footer');
+            sections.forEach((section, index) => {
+                setTimeout(() => {
+                    section.style.display = 'block';
+                    section.style.opacity = '0';
+                    section.style.visibility = 'visible';
+                    section.style.transform = 'translateY(20px)';
+                    section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                    
+                    // Trigger animation
+                    setTimeout(() => {
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
+                    }, 50);
+                }, index * 200);
+            });
+            
+            // Make fade-in-up elements visible
+            setTimeout(() => {
+                const fadeElements = document.querySelectorAll('.fade-in-up');
+                fadeElements.forEach(element => {
+                    element.classList.add('visible');
+                });
+            }, 300);
+            
+            // Scroll to pillars section after animation starts
+            setTimeout(() => {
+                scrollToSection('pillars');
+            }, 800);
         }
 
         // Enhance Enter The Ecosystem button with sound and jump effect
