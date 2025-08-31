@@ -1,5 +1,5 @@
 // Animations module: fade-in-up elements appear on scroll
-export function initAnimations() {
+function initAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -17,3 +17,6 @@ export function initAnimations() {
     observer.observe(el);
   });
 }
+
+// Make function available globally
+window.initAnimations = initAnimations;
