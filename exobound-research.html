@@ -11,76 +11,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Shared Navigation Script -->
-    <script src="./scripts/navigation.js" defer></script>
-    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="./styles/main.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" xintegrity="sha384-n8MVd4RsNIU0KOVEMckDMOe6bv2B6g6Ie3P5yPut2N5aXkECIlQPO4APqrllV5tG" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" xintegrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" xintegrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d0f26;
-            color: #f0f0f0;
-        }
-        .princeton-orange { color: #F58426; }
-        .electric-blue { color: #0066CC; }
-        .exo-blue { color: #66ccff; }
-        .cosmic-indigo { color: #8b5cf6; }
-        .section-glow { box-shadow: 0 0 40px -10px rgba(0, 102, 204, 0.3); }
-        .tab-active { 
-            background: linear-gradient(90deg, #66ccff, #ff9900);
-            color: #0c0c1a;
-            font-weight: 700;
-            text-shadow: none;
-            border: 1px solid #66ccff;
-        }
-        .tab-inactive { 
-            background: rgba(102, 204, 255, 0.1);
-            color: #66ccff;
-            border: 1px solid rgba(102, 204, 255, 0.3);
-            opacity: 0.7;
-        }
-        .tab-inactive:hover {
-            opacity: 1;
-            background: rgba(102, 204, 255, 0.2);
-        }
-        .exobound-title {
-            font-family: 'Orbitron', 'Arial', sans-serif;
-        }
-        .btn-ecosystem {
-            color: #ff9900;
-            font-size: 16px;
-            border: 1px solid #ff9900;
-            padding: 15px 30px;
-            border-radius: 25px;
-            background: rgba(255, 153, 0, 0.1);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            animation: pulse 1.5s infinite;
-        }
-        .btn-ecosystem:hover {
-            background: rgba(255, 153, 0, 0.2);
-            transform: translateY(-2px);
-        }
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(255, 153, 0, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 153, 0, 0);
-            }
-        }
-    </style>
 </head>
 <body class="antialiased">
     <!-- Navigation Container -->
@@ -211,6 +148,44 @@
         </div>
     </footer>
 
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeContactModal()">&times;</span>
+            <h2 class="contact-modal-heading">Contact Me</h2>
+            <div id="form-message" class="hidden text-center p-3 rounded-md mb-4 text-white"></div>
+            <form id="contactForm" onsubmit="submitContactForm(event)">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn-send">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <!-- Shared Navigation Script -->
+    <script src="./scripts/navigation.js"></script>
+
+    <!-- EmailJS Script MUST be loaded before contact.js -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- Shared Contact Form Script -->
+    <script src="./scripts/contact.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const tabsContainer = document.getElementById('tabs-container');
@@ -237,10 +212,6 @@
             }
         });
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        }
     </script>
 </body>
 </html>

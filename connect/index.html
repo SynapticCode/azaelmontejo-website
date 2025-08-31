@@ -11,162 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Shared Navigation Script -->
-    <script src="../scripts/navigation.js" defer></script>
-    
-    <!-- Animation Scripts -->
-    <script src="../scripts/animations.js" defer></script>
-    <script src="../scripts/main.js" defer></script>
-    
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d0f26;
-            color: #f0f0f0;
-        }
-        .princeton-orange { color: #F58426; }
-        .electric-blue { color: #0066CC; }
-        .bg-princeton-orange { background-color: #F58426; }
-        .border-princeton-orange { border-color: #F58426; }
-        .cosmic-indigo { color: #8b5cf6; }
-        .gateway-bg {
-            background: linear-gradient(135deg, #0c0c1a 0%, #1a0c2e 50%, #0c0c1a 100%);
-            background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        .exobound-section {
-            font-family: 'Orbitron', 'Arial', sans-serif;
-        }
-        .exo-blue { color: #66ccff; }
-        .exo-orange { color: #ff9900; }
-        .text-glow {
-            text-shadow: 0 0 10px rgba(102, 204, 255, 0.5);
-        }
-        .btn-exobound {
-            color: #ff9900;
-            font-size: 24px;
-            font-family: 'Orbitron', 'Arial', sans-serif;
-            animation: pulse 1.5s infinite;
-            border: 1px solid #ff9900;
-            padding: 15px 30px;
-            border-radius: 25px;
-            background: rgba(255, 153, 0, 0.1);
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 32px;
-            font-weight: 700;
-        }
-        .btn-exobound:hover {
-            background: rgba(255, 153, 0, 0.2);
-            text-decoration: none;
-            color: #ff9900;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-        }
-        .modal-content {
-            background-color: #1a1b2e;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #66ccff;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-        }
-        .close {
-            color: #66ccff;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close:hover {
-            color: #ff9900;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #66ccff;
-            font-weight: 600;
-        }
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            background: rgba(102, 204, 255, 0.1);
-            border: 1px solid rgba(102, 204, 255, 0.3);
-            border-radius: 5px;
-            color: #f0f0f0;
-            font-family: 'Inter', sans-serif;
-        }
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #66ccff;
-            box-shadow: 0 0 10px rgba(102, 204, 255, 0.3);
-        }
-        .btn-send {
-            background: linear-gradient(90deg, #66ccff, #ff9900);
-            color: #0c0c1a;
-            font-weight: 700;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
-        }
-        .btn-send:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(102, 204, 255, 0.3);
-        }
-        .btn-ecosystem {
-            background: #2d1a4a;
-            color: #fff;
-            border: 2px solid #4F00BC;
-            box-shadow: 0 0 0 0 #7c3aed;
-            transition: box-shadow 0.3s, transform 0.1s, background 0.2s, color 0.2s;
-            font-weight: 600;
-            font-size: 1.2rem;
-            padding: 0.85rem 2.5rem;
-            border-radius: 9999px;
-            cursor: pointer;
-            outline: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-        .btn-ecosystem:hover {
-            box-shadow: 0 0 24px 6px #7c3aed;
-            background: #4F00BC;
-            color: #fff;
-            text-decoration: none;
-        }
-        .btn-ecosystem:active {
-            transform: scale(0.95) translateY(2px);
-            box-shadow: 0 0 32px 12px #7c3aed;
-        }
-    </style>
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+
 </head>
 <body class="antialiased">
     <!-- Navigation Container -->
@@ -272,6 +119,7 @@
         <div class="modal-content">
             <span class="close" onclick="closeContactModal()">&times;</span>
             <h2 style="color: #66ccff; font-family: 'Orbitron', Arial, sans-serif; margin-bottom: 20px;">Contact Me</h2>
+            <div id="form-message" class="hidden text-center p-3 rounded-md mb-4 text-white"></div>
             <form id="contactForm" onsubmit="submitContactForm(event)">
                 <div class="form-group">
                     <label for="name">Name *</label>
@@ -294,75 +142,14 @@
         </div>
     </div>
 
-    <script>
-        // Initialize EmailJS
-        (function(){
-            emailjs.init("VKr4CXJi8MkzaweC4");
-        })();
+    <!-- SCRIPTS -->
+    <!-- Shared Navigation Script -->
+    <script src="../scripts/navigation.js"></script>
 
-        function openContactModal() {
-            document.getElementById('contactModal').style.display = 'block';
-        }
+    <!-- EmailJS Script MUST be loaded before contact.js -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        }
-
-        function closeContactModal() {
-            document.getElementById('contactModal').style.display = 'none';
-        }
-
-        // Close modal when clicking outside of it
-        window.onclick = function(event) {
-            const modal = document.getElementById('contactModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-        function submitContactForm(event) {
-            event.preventDefault();
-            
-            const submitBtn = event.target.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            
-            // Show loading state
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            const formData = new FormData(event.target);
-            const templateParams = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                subject: formData.get('subject'),
-                message: formData.get('message')
-            };
-            
-            // Send email using EmailJS
-            emailjs.send('service_0di3jju', 'template_ohrrhbb', templateParams)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    
-                    // Show success message
-                    alert('Message sent successfully! I\'ll get back to you soon.');
-                    
-                    // Reset form and close modal
-                    event.target.reset();
-                    closeContactModal();
-                }, function(error) {
-                    console.log('FAILED...', error);
-                    alert('Email failed to send. Error: ' + error.text);
-                    
-                    closeContactModal();
-                })
-                .finally(function() {
-                    // Reset button state
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                });
-        }
-    </script>
-
+    <!-- Shared Contact Form Script -->
+    <script src="../scripts/contact.js"></script>
 </body>
 </html>
