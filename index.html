@@ -18,8 +18,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Shared Navigation Script (defer to ensure DOM is loaded) -->
-    <script src="./scripts/navigation.js" defer></script>
+    <!-- Load navigation script first -->
+    <script src="./scripts/navigation.js"></script>
+    
+    <!-- Initialize navigation after DOM is loaded -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Re-initialize navigation to ensure it loads
+            if (window.sharedNavigation) {
+                window.sharedNavigation = new SharedNavigation();
+            }
+            
+            // Make sure all fade-in-up elements are visible
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            fadeElements.forEach(element => {
+                element.classList.add('visible');
+            });
+        });
+    </script>
     
     <style>
         body {

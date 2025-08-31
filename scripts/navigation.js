@@ -137,10 +137,13 @@ class SharedNavigation {
     }
 }
 
-// Initialize navigation
-new SharedNavigation();
+// Make SharedNavigation available globally
+window.SharedNavigation = SharedNavigation;
 
-// Export for module usage
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { SharedNavigation };
+// Initialize navigation when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new SharedNavigation());
+} else {
+    // DOM already loaded, initialize immediately
+    new SharedNavigation();
 }
