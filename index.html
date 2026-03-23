@@ -21,84 +21,117 @@
       opacity: 1;
       transform: translateY(0);
     }
-    @keyframes scroll-hint {
-      0%, 100% { transform: translateY(0); opacity: 0.5; }
-      50% { transform: translateY(6px); opacity: 1; }
+    @keyframes glitch-flicker {
+      0%, 89%, 100% {
+        text-shadow: 0 0 0 rgba(204, 0, 0, 0);
+        transform: translateX(0);
+      }
+      90% {
+        text-shadow: 1px 0 0 rgba(204, 0, 0, 0.35), -1px 0 0 rgba(255, 255, 255, 0.12);
+        transform: translateX(-0.5px);
+      }
+      91% {
+        text-shadow: -1px 0 0 rgba(204, 0, 0, 0.3), 1px 0 0 rgba(255, 255, 255, 0.1);
+        transform: translateX(0.5px);
+      }
+    }
+    .glitch-name {
+      animation: glitch-flicker 7s steps(1, end) infinite;
+      will-change: transform, text-shadow;
+    }
+    @keyframes line-pulse {
+      0%, 100% { height: 16px; opacity: 0.35; }
+      50% { height: 32px; opacity: 0.9; }
     }
     .scroll-indicator {
-      animation: scroll-hint 2s ease-in-out infinite;
+      animation: line-pulse 1.8s ease-in-out infinite;
+    }
+    .divider-red {
+      width: 100px;
+      height: 1px;
+      background: rgba(204, 0, 0, 0.45);
+    }
+    .accent-line {
+      width: 20px;
+      height: 2px;
+      background: #cc0000;
     }
   </style>
 </head>
-<body class="antialiased">
+<body class="antialiased bg-[#050505] text-white">
   <div id="navbar-container"></div>
 
   <!-- Hero -->
-  <section class="relative min-h-screen flex flex-col items-center justify-center bg-[#0a0a0a] px-4 text-center" aria-label="Introduction">
-    <h1 class="text-6xl md:text-8xl font-black tracking-tight text-white">AZAEL MONTEJO JR.</h1>
-    <p class="mt-4 text-lg md:text-xl font-medium tracking-wide text-[#a0a0a0]">Builder. Researcher. Veteran.</p>
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator text-[#a0a0a0]" aria-hidden="true">
-      <i class="fa-solid fa-chevron-down text-xl"></i>
+  <section class="relative min-h-screen flex flex-col items-center justify-center bg-[#050505] px-4 text-center" aria-label="Introduction">
+    <h1 class="glitch-name text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight text-white">AZAEL MONTEJO JR.</h1>
+    <div class="divider-red mt-6 mx-auto" aria-hidden="true"></div>
+    <p class="mt-6 text-xs sm:text-sm md:text-base font-medium uppercase tracking-[0.3em] text-[#666666]">BUILDER. RESEARCHER. VETERAN.</p>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2" aria-hidden="true">
+      <span class="scroll-indicator block w-px bg-white"></span>
     </div>
   </section>
 
   <!-- Currently -->
   <section class="fade-in py-20 md:py-24 px-6" aria-labelledby="currently-heading">
     <div class="max-w-6xl mx-auto">
-      <h2 id="currently-heading" class="text-2xl md:text-3xl font-bold text-white mb-10">Currently</h2>
+      <h2 id="currently-heading" class="text-2xl md:text-3xl font-bold uppercase tracking-[0.2em] text-white mb-10">CURRENTLY</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 flex flex-col h-full">
-          <h3 class="card-title text-lg font-bold mb-3">Princeton Research</h3>
-          <p class="card-body text-sm leading-relaxed flex-grow">Investigating how humans balance adaptation and coordination at the Velez CoLab. NSF-funded computational cognitive science.</p>
+        <article class="card p-6 bg-[#0f0f0f] border border-[#1a1a1a] transition duration-300 hover:-translate-y-1 hover:border-[#333333] flex flex-col h-full">
+          <span class="accent-line mb-4" aria-hidden="true"></span>
+          <h3 class="card-title text-lg font-bold uppercase mb-3 text-white">PRINCETON RESEARCH</h3>
+          <p class="card-body text-sm leading-relaxed text-[#666666] flex-grow">Computational cognitive science at the Velez CoLab. NSF-backed, systems-focused work.</p>
         </article>
-        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 flex flex-col h-full">
-          <h3 class="card-title text-lg font-bold mb-3">Student Veteran Org</h3>
-          <p class="card-body text-sm leading-relaxed flex-grow">Founded and leading the Rutgers Newark Student Veteran Organization. Building community for vets transitioning to campus life.</p>
+        <article class="card p-6 bg-[#0f0f0f] border border-[#1a1a1a] transition duration-300 hover:-translate-y-1 hover:border-[#333333] flex flex-col h-full">
+          <span class="accent-line mb-4" aria-hidden="true"></span>
+          <h3 class="card-title text-lg font-bold uppercase mb-3 text-white">STUDENT VETERAN ORG</h3>
+          <p class="card-body text-sm leading-relaxed text-[#666666] flex-grow">Founder and president at Rutgers Newark. Building a stronger runway for veterans on campus.</p>
         </article>
-        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 flex flex-col h-full">
-          <h3 class="card-title text-lg font-bold mb-3">EXOBOUND</h3>
-          <p class="card-body text-sm leading-relaxed mb-4 flex-grow">Exploring the boundaries of human potential through research and experimentation.</p>
-          <a href="/EXOBOUND/" class="card-link text-sm font-semibold mt-auto">Open project →</a>
+        <article class="card p-6 bg-[#0f0f0f] border border-[#1a1a1a] transition duration-300 hover:-translate-y-1 hover:border-[#333333] flex flex-col h-full">
+          <span class="accent-line mb-4" aria-hidden="true"></span>
+          <h3 class="card-title text-lg font-bold uppercase mb-3 text-white">EXOBOUND</h3>
+          <p class="card-body text-sm leading-relaxed text-[#666666] mb-4 flex-grow">A live lab for testing edge ideas, performance systems, and creative execution.</p>
+          <a href="/EXOBOUND/" class="card-link text-sm font-semibold text-white hover:text-[#cc0000] transition-colors mt-auto">OPEN PROJECT →</a>
         </article>
-        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 flex flex-col h-full">
-          <h3 class="card-title text-lg font-bold mb-3">Writing</h3>
-          <p class="card-body text-sm leading-relaxed mb-4 flex-grow">Thinking out loud about systems, human behavior, and building things that matter.</p>
-          <a href="/blog/" class="card-link text-sm font-semibold mt-auto">Read the blog →</a>
+        <article class="card p-6 bg-[#0f0f0f] border border-[#1a1a1a] transition duration-300 hover:-translate-y-1 hover:border-[#333333] flex flex-col h-full">
+          <span class="accent-line mb-4" aria-hidden="true"></span>
+          <h3 class="card-title text-lg font-bold uppercase mb-3 text-white">WRITING</h3>
+          <p class="card-body text-sm leading-relaxed text-[#666666] mb-4 flex-grow">Field notes on leadership, behavior, and building with intent.</p>
+          <a href="/blog/" class="card-link text-sm font-semibold text-white hover:text-[#cc0000] transition-colors mt-auto">READ THE BLOG →</a>
         </article>
       </div>
     </div>
   </section>
 
   <!-- Social proof -->
-  <section class="fade-in py-10 px-6 border-y border-[#2a2a2a]/50" aria-label="Affiliations">
-    <p class="max-w-4xl mx-auto text-center text-xs sm:text-sm text-[#a0a0a0] leading-relaxed">
-      Princeton <span class="mx-1 sm:mx-2 opacity-60">·</span>
-      Rutgers Honors College <span class="mx-1 sm:mx-2 opacity-60">·</span>
-      NSF <span class="mx-1 sm:mx-2 opacity-60">·</span>
-      U.S. Navy <span class="mx-1 sm:mx-2 opacity-60">·</span>
-      USS Nimitz
+  <section class="fade-in py-10 px-6 border-y border-[#1a1a1a]" aria-label="Affiliations">
+    <p class="max-w-5xl mx-auto text-center text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#666666] leading-relaxed">
+      PRINCETON <span class="mx-2 opacity-70">|</span>
+      RUTGERS HONORS COLLEGE <span class="mx-2 opacity-70">|</span>
+      NSF <span class="mx-2 opacity-70">|</span>
+      U.S. NAVY <span class="mx-2 opacity-70">|</span>
+      USS NIMITZ
     </p>
   </section>
 
   <!-- Latest from the blog -->
   <section class="fade-in py-20 md:py-24 px-6" aria-labelledby="latest-heading">
     <div class="max-w-6xl mx-auto">
-      <h2 id="latest-heading" class="text-2xl md:text-3xl font-bold text-white mb-10">Latest</h2>
+      <h2 id="latest-heading" class="text-2xl md:text-3xl font-bold uppercase tracking-[0.2em] text-white mb-10">LATEST</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 flex flex-col h-full">
+        <article class="card p-6 bg-[#0f0f0f] border border-[#1a1a1a] transition duration-300 hover:-translate-y-1 hover:border-[#333333] flex flex-col h-full">
           <h3 class="card-title text-lg font-bold mb-3">My Thesis is the Bridge: Why I'm Pursuing Both Computer Science and Civil Justice</h3>
-          <p class="card-body text-sm leading-relaxed mb-6 flex-grow">When I tell people I'm pursuing both Computer Science and Civil Justice at Rutgers, I often get puzzled looks.</p>
-          <a href="blog/posts/my-thesis-is-the-bridge.html" class="card-link font-semibold text-sm mt-auto">Read →</a>
+          <p class="card-body text-sm leading-relaxed text-[#666666] mb-6 flex-grow">Why computing and civil justice belong in the same blueprint.</p>
+          <a href="blog/posts/my-thesis-is-the-bridge.html" class="card-link font-semibold text-sm text-white hover:text-[#cc0000] transition-colors mt-auto">Read →</a>
         </article>
-        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 flex flex-col h-full">
+        <article class="card p-6 bg-[#0f0f0f] border border-[#1a1a1a] transition duration-300 hover:-translate-y-1 hover:border-[#333333] flex flex-col h-full">
           <h3 class="card-title text-lg font-bold mb-3">The Day the Ocean Taught Me What a Hero Really Is</h3>
-          <p class="card-body text-sm leading-relaxed mb-6 flex-grow">I was a Junior Lifeguard Cadet, a title that carried the weight of a kingdom in my young hands.</p>
-          <a href="blog/posts/the-day-the-ocean-taught-me.html" class="card-link font-semibold text-sm mt-auto">Read →</a>
+          <p class="card-body text-sm leading-relaxed text-[#666666] mb-6 flex-grow">A hard lesson in responsibility, pressure, and what real courage looks like.</p>
+          <a href="blog/posts/the-day-the-ocean-taught-me.html" class="card-link font-semibold text-sm text-white hover:text-[#cc0000] transition-colors mt-auto">Read →</a>
         </article>
-        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 flex flex-col h-full">
+        <article class="card p-6 bg-[#0f0f0f] border border-[#1a1a1a] transition duration-300 hover:-translate-y-1 hover:border-[#333333] flex flex-col h-full">
           <h3 class="card-title text-lg font-bold mb-3">The Day I Collaborated on My Professor's Passion Project</h3>
-          <p class="card-body text-sm leading-relaxed mb-6 flex-grow">The most profound revelations have come not from solitary study, but from the electric current of collaboration.</p>
-          <a href="blog/posts/professor-passion-project.html" class="card-link font-semibold text-sm mt-auto">Read →</a>
+          <p class="card-body text-sm leading-relaxed text-[#666666] mb-6 flex-grow">What happens when shared obsession meets sharp execution.</p>
+          <a href="blog/posts/professor-passion-project.html" class="card-link font-semibold text-sm text-white hover:text-[#cc0000] transition-colors mt-auto">Read →</a>
         </article>
       </div>
     </div>
@@ -107,13 +140,13 @@
   <!-- Stay connected -->
   <section class="fade-in py-20 md:py-24 px-6 pb-28" aria-labelledby="stay-heading">
     <div class="max-w-md mx-auto text-center">
-      <h2 id="stay-heading" class="text-2xl md:text-3xl font-bold text-white mb-8">Stay in the loop</h2>
+      <h2 id="stay-heading" class="text-2xl md:text-3xl font-bold uppercase tracking-[0.2em] text-white mb-8">STAY IN THE LOOP</h2>
       <form class="flex flex-col sm:flex-row gap-3" onsubmit="return false;">
         <label for="email-signup" class="sr-only">Email</label>
-        <input id="email-signup" type="email" name="email" placeholder="you@email.com" autocomplete="email" class="flex-1 rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-3 text-[#f0f0f0] placeholder:text-[#666] focus:outline-none focus:ring-2 focus:ring-[#ff7f0e]/50">
-        <button type="button" class="rounded-lg bg-[#4F00BC] px-6 py-3 font-semibold text-white transition hover:brightness-110">Subscribe</button>
+        <input id="email-signup" type="email" name="email" placeholder="you@email.com" autocomplete="email" class="flex-1 border border-[#1a1a1a] bg-[#0f0f0f] px-4 py-3 text-white placeholder:text-[#666666] focus:outline-none focus:ring-1 focus:ring-[#333333]">
+        <button type="button" class="border border-white bg-white px-6 py-3 font-bold uppercase tracking-wide text-black transition hover:bg-black hover:text-white">SUBSCRIBE</button>
       </form>
-      <p class="mt-4 text-sm text-[#a0a0a0]">Occasional updates on research, projects, and ideas. No spam.</p>
+      <p class="mt-4 text-[10px] uppercase tracking-[0.18em] text-[#666666]">OCCASIONAL SIGNALS ON RESEARCH, BUILDS, AND IDEAS. NO NOISE.</p>
     </div>
   </section>
 
