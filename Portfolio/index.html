@@ -1,237 +1,146 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Azael Montejo | Technical Showcase</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Shared Navigation Script -->
-    <script src="../scripts/navigation.js" defer></script>
-    
-    <!-- Animation Script -->
-    <script src="../scripts/animations.js" defer></script>
-    <script src="../scripts/main.js" defer></script>
-    
-    <style>
-        body {
-            background-color: #000005;
-            color: #e0e0e0;
-            font-family: 'Inter', sans-serif;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Space Grotesk', sans-serif;
-            color: #f3f3f3;
-        }
-    </style>
-    
-    <style>
-        /* --- STYLE CORRECTIONS --- */
-        body {
-            font-family: 'Inter', sans-serif;
-            /* Deeper, richer blue background */
-            background-color: #050816; 
-            /* Brighter, cleaner text color for high contrast */
-            color: #f0f2f5; 
-        }
-        .font-mono {
-            font-family: 'Roboto Mono', monospace;
-        }
-        .skill-tag {
-            display: inline-block;
-            /* A slightly more saturated blue for tags */
-            background-color: #1e293b; 
-            color: #cbd5e1;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin: 0.25rem;
-            /* A clearer border */
-            border: 1px solid #334155;
-            transition: all 0.2s ease-in-out;
-        }
-        .skill-tag:hover {
-            background-color: #f97316; /* Vibrant orange accent */
-            color: #020617;
-            border-color: #fb923c;
-        }
-        .card {
-            /* Dark charcoal card background to pop against the navy body */
-            background-color: #0f172a; 
-            border: 1px solid #334155; /* Muted but clear border */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(249, 115, 22, 0.2);
-        }
-        .card-icon {
-            background-color: #1e293b;
-            color: #f97316; /* Orange accent */
-        }
-        .link-hover {
-            transition: color 0.2s ease-in-out;
-        }
-        .link-hover:hover {
-            color: #f97316; /* Orange accent */
-        }
-        /* Ensure all headings are bright white */
-        h1, h2, h3 {
-            color: #ffffff;
-        }
-        /* --- END OF STYLE CORRECTIONS --- */
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Azael Montejo Jr.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/styles/main.css">
 </head>
-<body class="antialiased">
-    <!-- Navigation will be injected here by the shared navigation script -->
-    <div id="navigation-container"></div>
+<body class="antialiased bg-[#050505] text-white min-h-screen">
+  <div id="navbar-container"></div>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 py-12 md:py-20">
+  <main class="pt-32 pb-20 px-6 md:px-10 lg:px-16">
+    <section class="max-w-6xl mx-auto">
+      <header class="mb-12 md:mb-16">
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-[0.2em] uppercase text-white leading-none">
+          PROJECTS
+        </h1>
+        <p class="mt-4 text-xs md:text-sm uppercase tracking-[0.18em] text-[#666666]">
+          What I build, what I've built, and the skills behind it.
+        </p>
+      </header>
 
-        <!-- Introduction -->
-        <section class="text-center max-w-3xl mx-auto mb-16">
-            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Skills in Action</h1>
-            <p class="text-lg text-gray-300">
-                I believe in solving problems through a systems-thinking approach, whether it's debugging a server, architecting a research application, or structuring a clean front-end. This portfolio showcases practical examples of how I apply my skills in software development, DevOps, and project management to build robust and maintainable solutions.
-            </p>
-        </section>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <article class="bg-[#0f0f0f] border border-[#1a1a1a] rounded-none p-6 md:p-7 transition-all duration-200 hover:border-[#333333] hover:-translate-y-1">
+          <div class="w-5 h-[2px] bg-[#8b0000] mb-4"></div>
+          <h2 class="text-xl font-bold uppercase tracking-[0.08em] text-white mb-4">
+            Event Production &amp; Community Building
+          </h2>
+          <p class="text-sm text-[#666666] mb-4">
+            <span class="font-semibold uppercase tracking-[0.08em] text-white">Scenario:</span>
+            Building immersive live events and creative communities — from concept to execution.
+          </p>
+          <ul class="list-disc list-inside space-y-2 text-sm text-[#666666] mb-6">
+            <li>Talent Booking &amp; Artist Relations</li>
+            <li>Event Production &amp; Logistics</li>
+            <li>Contract Negotiation</li>
+            <li>Stage &amp; Experience Design</li>
+            <li>Community Building</li>
+            <li>Brand Partnerships</li>
+            <li>Budget Management</li>
+            <li>Artist Coordination</li>
+          </ul>
+          <p class="text-[11px] uppercase tracking-[0.14em] font-bold text-white mb-3">Skills Demonstrated</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Talent Booking</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Event Production</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Negotiation</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Experience Design</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Community Building</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Partnerships</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Budget Management</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Artist Coordination</span>
+          </div>
+        </article>
 
-        <!-- Portfolio Cards Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <article class="bg-[#0f0f0f] border border-[#1a1a1a] rounded-none p-6 md:p-7 transition-all duration-200 hover:border-[#333333] hover:-translate-y-1">
+          <div class="w-5 h-[2px] bg-[#8b0000] mb-4"></div>
+          <h2 class="text-xl font-bold uppercase tracking-[0.08em] text-white mb-4">
+            Infrastructure &amp; Runtime Debugging
+          </h2>
+          <p class="text-sm text-[#666666] mb-4">
+            <span class="font-semibold uppercase tracking-[0.08em] text-white">Scenario:</span>
+            Resolved a critical server crash in a remote development environment caused by a conflicting VS Code AI extension.
+          </p>
+          <ul class="list-disc list-inside space-y-2 text-sm text-[#666666] mb-6">
+            <li>Diagnosed and stopped a <code>systemd</code> service stuck in a restart loop.</li>
+            <li>Traced runtime errors to a corrupted Node.js environment.</li>
+            <li>Systematically removed residual files and conflicting extensions.</li>
+            <li>Verified system integrity via symlinks and service health checks.</li>
+            <li>Restored the server to a stable state without full reinstallation.</li>
+          </ul>
+          <p class="text-[11px] uppercase tracking-[0.14em] font-bold text-white mb-3">Skills Demonstrated</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Linux Server</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Node.js Debugging</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">systemd</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">DevOps</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Root Cause Analysis</span>
+          </div>
+        </article>
 
-            <!-- Card 1: DevOps & Systems Troubleshooting -->
-            <div class="card rounded-lg shadow-lg overflow-hidden flex flex-col">
-                <div class="p-6 flex-grow">
-                    <div class="flex items-center mb-4">
-                        <div class="card-icon p-3 rounded-full mr-4">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>
-                        </div>
-                        <h3 class="text-xl font-semibold">Infrastructure & Runtime Debugging</h3>
-                    </div>
-                    <p class="text-sm text-gray-400 mb-4"><strong>Scenario:</strong> Resolved a critical server crash in a remote development environment caused by a conflicting VS Code AI extension under Beta build.</p>
-                    <ul class="space-y-2 text-sm list-disc list-inside text-gray-300">
-                        <li>Diagnosed and stopped a `systemd` service stuck in a restart loop.</li>
-                        <li>Traced runtime errors to a corrupted Node.js environment.</li>
-                        <li>Systematically removed residual files and conflicting extensions.</li>
-                        <li>Verified system integrity via `symlinks` and service health checks.</li>
-                        <li>Restored the server to a stable state without a full reinstallation.</li>
-                    </ul>
-                </div>
-                <div class="p-6 bg-slate-900/70 mt-auto">
-                    <h4 class="font-semibold text-sm text-gray-200 mb-2">Skills Demonstrated</h4>
-                    <div class="flex flex-wrap">
-                        <span class="skill-tag">Linux Server</span>
-                        <span class="skill-tag">Node.js Debugging</span>
-                        <span class="skill-tag">systemd</span>
-                        <span class="skill-tag">DevOps</span>
-                        <span class="skill-tag">Root Cause Analysis</span>
-                    </div>
-                </div>
-            </div>
+        <article class="bg-[#0f0f0f] border border-[#1a1a1a] rounded-none p-6 md:p-7 transition-all duration-200 hover:border-[#333333] hover:-translate-y-1">
+          <div class="w-5 h-[2px] bg-[#8b0000] mb-4"></div>
+          <h2 class="text-xl font-bold uppercase tracking-[0.08em] text-white mb-4">
+            Software Architecture &amp; Project Management
+          </h2>
+          <p class="text-sm text-[#666666] mb-4">
+            <span class="font-semibold uppercase tracking-[0.08em] text-white">Project:</span>
+            EXOBOUND — Research platform for studying team coordination at Princeton University.
+          </p>
+          <ul class="list-disc list-inside space-y-2 text-sm text-[#666666] mb-6">
+            <li>Architected migration from broken module setup to stable classic script build.</li>
+            <li>Engineered <code>InputManager</code> and <code>GlobalSettings</code> modules to fix control bugs.</li>
+            <li>Maintained a living project journal and clear planning documentation.</li>
+            <li>Resolved trial sequencing and asset-loading issues in Phaser.js.</li>
+          </ul>
+          <p class="text-[11px] uppercase tracking-[0.14em] font-bold text-white mb-3">Skills Demonstrated</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">JavaScript (ES6+)</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Phaser.js</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">jsPsych</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Game Development</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Code Refactoring</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Project Management</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Technical Docs</span>
+          </div>
+        </article>
 
-            <!-- Card 2: Software & Game Development -->
-            <div class="card rounded-lg shadow-lg overflow-hidden flex flex-col">
-                <div class="p-6 flex-grow">
-                    <div class="flex items-center mb-4">
-                        <div class="card-icon p-3 rounded-full mr-4">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                        </div>
-                        <h3 class="text-xl font-semibold">Software Architecture & Project Management</h3>
-                    </div>
-                    <p class="text-sm text-gray-400 mb-4"><strong>Project:</strong> EXOBOUND (Research platform for studying team coordination at Princeton University).</p>
-                    <ul class="space-y-2 text-sm list-disc list-inside text-gray-300">
-                        <li>Architected migration from a broken module setup to a stable classic script build.</li>
-                        <li>Engineered `InputManager` and `GlobalSettings` modules to fix critical control bugs.</li>
-                        <li>Maintained a living project journal and detailed planning documents.</li>
-                        <li>Resolved complex trial sequencing and asset loading bugs in Phaser.js.</li>
-                    </ul>
-                </div>
-                <div class="p-6 bg-slate-900/70 mt-auto">
-                    <h4 class="font-semibold text-sm text-gray-200 mb-2">Skills Demonstrated</h4>
-                    <div class="flex flex-wrap">
-                        <span class="skill-tag">JavaScript (ES6+)</span>
-                        <span class="skill-tag">Phaser.js</span>
-                        <span class="skill-tag">jsPsych</span>
-                        <span class="skill-tag">Game Development</span>
-                        <span class="skill-tag">Code Refactoring</span>
-                        <span class="skill-tag">Project Management</span>
-                        <span class="skill-tag">Technical Docs</span>
-                    </div>
-                </div>
-            </div>
+        <article class="bg-[#0f0f0f] border border-[#1a1a1a] rounded-none p-6 md:p-7 transition-all duration-200 hover:border-[#333333] hover:-translate-y-1">
+          <div class="w-5 h-[2px] bg-[#8b0000] mb-4"></div>
+          <h2 class="text-xl font-bold uppercase tracking-[0.08em] text-white mb-4">
+            Front-End Development &amp; Maintainability
+          </h2>
+          <p class="text-sm text-[#666666] mb-4">
+            <span class="font-semibold uppercase tracking-[0.08em] text-white">Project:</span>
+            Personal Website Blog (azaelmontejo.com)
+          </p>
+          <ul class="list-disc list-inside space-y-2 text-sm text-[#666666] mb-6">
+            <li>Migrated inline CSS to dedicated external stylesheets for modularity.</li>
+            <li>Designed and implemented a modern, readable dark theme.</li>
+            <li>Improved maintainability by separating content and presentation layers.</li>
+            <li>Added safety and discoverability improvements, including SEO-focused structure.</li>
+          </ul>
+          <p class="text-[11px] uppercase tracking-[0.14em] font-bold text-white mb-3">Skills Demonstrated</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">HTML5</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">CSS3</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">UI/UX Design</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Responsive Design</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">Code Modularity</span>
+            <span class="px-2.5 py-1 text-xs text-[#666666] border border-[#1a1a1a] bg-transparent rounded-sm">SEO Best Practices</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
 
-            <!-- Card 3: Web Development & Best Practices -->
-            <div class="card rounded-lg shadow-lg overflow-hidden flex flex-col">
-                <div class="p-6 flex-grow">
-                    <div class="flex items-center mb-4">
-                        <div class="card-icon p-3 rounded-full mr-4">
-                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <h3 class="text-xl font-semibold">Front-End Development & Maintainability</h3>
-                    </div>
-                    <p class="text-sm text-gray-400 mb-4"><strong>Project:</strong> Personal Website Blog (`azaelmontejo.com`).</p>
-                    <ul class="space-y-2 text-sm list-disc list-inside text-gray-300">
-                        <li>Migrated all inline CSS to a dedicated external stylesheet for modularity.</li>
-                        <li>Designed and implemented a modern, readable dark theme with high contrast.</li>
-                        <li>Improved performance and maintainability by separating content and style.</li>
-                        <li>Created file-based backups and configured `robots.txt` for safety and SEO.</li>
-                    </ul>
-                </div>
-                <div class="p-6 bg-slate-900/70 mt-auto">
-                    <h4 class="font-semibold text-sm text-gray-200 mb-2">Skills Demonstrated</h4>
-                    <div class="flex flex-wrap">
-                        <span class="skill-tag">HTML5</span>
-                        <span class="skill-tag">CSS3</span>
-                        <span class="skill-tag">UI/UX Design</span>
-                        <span class="skill-tag">Responsive Design</span>
-                        <span class="skill-tag">Code Modularity</span>
-                        <span class="skill-tag">SEO Best Practices</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-slate-900/70 mt-20">
-        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
-            <p>© 2023 Azael Montejo Jr. All rights reserved.</p>
-            <p>&copy; 2025 Azael Montejo. All Rights Reserved.</p>
-            <div class="flex justify-center space-x-6 mt-4">
-                 <a href="https://www.linkedin.com/in/azael-montejo/" target="_blank" rel="noopener noreferrer" class="link-hover">LinkedIn</a>
-                 <a href="https://github.com/Azael-Montejo" target="_blank" rel="noopener noreferrer" class="link-hover">GitHub</a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Ensure navigation is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            const navContainer = document.getElementById('navigation-container');
-            if (navContainer) {
-                const nav = new SharedNavigation();
-                navContainer.innerHTML = nav.generateNavigationHTML();
-            }
-        });
-    </script>
-
-    <script>
-        // Mobile menu toggle
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script>
-
+  <div id="footer-container"></div>
+  <script src="/scripts/components.js"></script>
 </body>
 </html>
