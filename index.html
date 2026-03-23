@@ -1,308 +1,144 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="dTQ-4cCozE2FWlej74EBIIQIXRXO1-rT7CK35q7czSo" />
-    <title>Azael Montejo Jr. | AI, Research, & Human Potential</title>
-    
-    <!-- Chosen Palette: Futuristic Minimalism - Light (Background: #FFFFFF, Text: #1F2937, Accent: #4F00BC, Gray: #6B7280) -->
-    <!-- Application Structure Plan: A single-page, narrative funnel design. The structure guides the user on a journey, starting with a high-impact hook (Hero), establishing current credibility (Pillars), building a relatable backstory (Journey), showcasing thought leadership (Insights), and ending with clear calls-to-action (Ecosystem). This sequential flow is designed to build intrigue and authority, making it a powerful tool for personal branding and converting interest into connection, optimized for mobile-first consumption. -->
-    <!-- Visualization & Content Choices: The report's content is qualitative. Goal: Present a career and life narrative. Method: 1) Hero: Large typography for immediate impact. 2) Pillars: Card-based layout with expandable details for deep dives into key projects. 3) Journey: A vertical timeline to visualize a chronological path. 4) Insights/Ecosystem: Grids/Flex layouts for organized content and actions. Interaction: Scroll-triggered animations and click-to-expand content add a dynamic feel without needing charts. Justification: These choices translate a text-based biography into an engaging, interactive story. Library/Method: Vanilla JS for interactions, Tailwind CSS for structure. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Load main CSS file with cache busting -->
-    <link rel="stylesheet" href="styles/main.css">
-</head>
-    
-    <!-- Load navigation script first -->
-    <script src="./scripts/navigation.js"></script>
-    
-    <!-- Initialize navigation after DOM is loaded -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Re-initialize navigation to ensure it loads
-            if (window.sharedNavigation) {
-                window.sharedNavigation = new SharedNavigation();
-            }
-            
-            // Hide all content sections initially except hero
-            const sections = document.querySelectorAll('section:not(#hero), footer');
-            sections.forEach(section => {
-                section.style.display = 'none';
-                section.style.opacity = '0';
-                section.style.visibility = 'hidden';
-            });
-            
-            // Force hero section to maintain centering after navigation loads
-            const heroSection = document.getElementById('hero');
-            if (heroSection) {
-                heroSection.style.display = 'flex';
-                heroSection.style.alignItems = 'center';
-                heroSection.style.justifyContent = 'center';
-                heroSection.style.height = '100vh';
-                heroSection.style.minHeight = '100vh';
-                heroSection.style.marginTop = '-80px';
-                heroSection.style.paddingTop = '80px';
-                heroSection.style.opacity = '1';
-                heroSection.style.visibility = 'visible';
-            }
-        });
-    </script>
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="dTQ-4cCozE2FWlej74EBIIQIXRXO1-rT7CK35q7czSo" />
+  <title>Azael Montejo Jr. — Builder, Researcher, Veteran</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes scroll-hint {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(6px); opacity: 1; }
+    }
+    .scroll-indicator {
+      animation: scroll-hint 2s ease-in-out infinite;
+    }
+  </style>
 </head>
 <body class="antialiased">
-    <!-- Navigation Container -->
-    <div id="navigation-container"></div>
+  <div id="navbar-container"></div>
 
-    <!-- Section 1: The Hook (Hero Section) -->
-    <section id="hero" class="h-screen min-h-[700px] flex flex-col items-center justify-center text-center p-4">
-        <div class="fade-in-up visible">
-            <h1 class="text-3xl md:text-5xl font-bold tracking-tighter hero-title mb-2">Decoding the Algorithm of Ambition.</h1>
-            <h2 class="text-5xl md:text-8xl font-bold tracking-tighter hero-title mb-6">Azael Montejo Jr.</h2>
-            <h3 class="text-xl md:text-3xl mt-4 max-w-3xl mx-auto hero-sub mb-12">How computational insights are unlocking the architecture of human potential.</h3>
-            <div class="flex justify-center my-12">
-                <div class="pulse-element"></div>
-            </div>
-            <a href="#pillars" class="btn-ecosystem" onclick="enterEcosystem()">Enter The Ecosystem</a>
-        </div>
-    </section>
+  <!-- Hero -->
+  <section class="relative min-h-screen flex flex-col items-center justify-center bg-[#0a0a0a] px-4 text-center" aria-label="Introduction">
+    <h1 class="text-6xl md:text-8xl font-black tracking-tight text-white">AZAEL MONTEJO JR.</h1>
+    <p class="mt-4 text-lg md:text-xl font-medium tracking-wide text-[#a0a0a0]">Builder. Researcher. Veteran.</p>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator text-[#a0a0a0]" aria-hidden="true">
+      <i class="fa-solid fa-chevron-down text-xl"></i>
+    </div>
+  </section>
 
-    <!-- Section 2: The Pillars (Your "Now") -->
-    <section id="pillars" class="py-24">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 card-title">The Pillars of Now</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Pillar 1 -->
-                <div class="fade-in-up p-8 border border-gray-200 flex flex-col">
-                    <h3 class="text-2xl font-bold mb-2 card-title">Private Swim Coach</h3>
-                    <p class="card-body mb-4 flex-grow">Founded a small swim business he called Swim Technique Academy, coaching over a hundred families. What started as a business became a living lab for understanding the delicate balance between individual adaptation and team coordination.</p>
-                    <button onclick="toggleProjectDetails('project1')" class="text-left font-bold cosmic-indigo hover:underline self-start">Learn More &rarr;</button>
-                    <div id="project1" class="project-details">
-                         <h4 class="text-lg font-bold mt-4 mb-2" style="color:#fff;">Project: From Swim Lane to Systems Thinking</h4>
-                         <p class="text-sm card-body">My experience building the Swim Technique Academy was the first time I truly understood the delicate balance between individual adaptation and organizational coordination. My clients' success depended on their ability to adapt their body to new techniques I taught them, while my business's success depended on my ability to coordinate a structured, repeatable curriculum for over a hundred families. It was a real-world, high-stakes application of a theoretical problem I would later encounter in a Princeton lab.</p>
-                         <p class="text-sm card-body mt-4">My journey from the pool deck to the digital lab began in prison, where I devoured books on systems thinking, psychology, and organizational strategy. I realized that the same frameworks I used to build my business were the very tools I needed to understand the chaos of my own life. The swim lane and the prison cell were, in a sense, the same place: a controlled environment where I could observe, test, and refine my understanding of how people learn, change, and grow.</p>
-                         <p class="text-sm card-body mt-4">Today, my research with the Velez CoLab at Princeton is a direct continuation of that journey. We investigate a fundamental tension in teamwork: the conflict between adapting to new information and coordinating with others. In the same way I had to tailor a swimming program to an individual's unique needs, my work now involves modifying and analyzing a single-player game to test how human intuition weighs these factors.</p>
-                         <p class="text-sm card-body mt-4">The ultimate goal, however, remains the same as it was on the pool deck: to create environments where individuals are empowered to thrive without sacrificing the success of the group. It's a journey from the chlorine-scented water of a local YMCA to the pristine halls of Princeton, all in pursuit of a single question: how can we empower collaboration? My past experiences, particularly as a swim coach, were not a detour; they were my training for this.</p>
-                    </div>
-                </div>
-                <!-- Pillar 2: Princeton Researcher -->
-                <div class="fade-in-up p-8 border border-gray-200 flex flex-col" style="transition-delay: 150ms;">
-                    <h3 class="text-2xl font-bold mb-2 card-title">Princeton University Researcher</h3>
-                    <p class="card-body mb-4 flex-grow">Investigating computational cognitive science at the Velez CoLab through the National Science Foundation REU program.</p>
-                    <button onclick="toggleProjectDetails('project2')" class="text-left font-bold cosmic-indigo hover:underline self-start">Learn More &rarr;</button>
-                    <div id="project2" class="project-details">
-                         <h4 class="text-lg font-bold mt-4 mb-2" style="color:#fff;">Project: The Coordination-Adaptation Tradeoff</h4>
-                         <p class="text-sm card-body">Why are small startups nimble, while big companies are slow? My research explores this tradeoff. In teams, individuals must balance adapting to new information (like a volleyball player moving for the ball) against the risk of miscoordinating with teammates (crashing into them). My work involves modifying and analyzing a single-player game to test how human intuition weighs these factors, laying the groundwork for future multiplayer experiments in team dynamics.</p>
-                    </div>
-                </div>
-                <!-- Pillar 3 -->
-                <div class="fade-in-up p-8 border border-gray-200 flex flex-col" style="transition-delay: 300ms;">
-                    <h3 class="text-2xl font-bold mb-2 card-title">Rutgers Honors College</h3>
-                    <p class="card-body mb-4 flex-grow">Exploring the intersection of technology, entrepreneurship, and human behavior as a dedicated scholar.</p>
-                    <button onclick="toggleProjectDetails('project3')" class="text-left font-bold cosmic-indigo hover:underline self-start">Learn More &rarr;</button>
-                    <div id="project3" class="project-details">
-                         <h4 class="text-lg font-bold mt-4 mb-2" style="color:#fff;">Rutgers Honors College: From Founder to Scholar</h4>
-                         <p class="text-sm card-body">My journey to Rutgers Honors College is a continuation of a lifelong mission to understand and build systems that work for people. From founding my own swim academy to collaborating with my fitness clients through a tech-forward app, I've always been driven by the question of how to connect disparate parts into a cohesive, functional whole. At Rutgers, my pursuit of a Computer Science degree is about mastering the technical skills needed to build solutions, while the Honors Living-Learning Community provides a deep, empathetic understanding of the human systems they will serve.</p>
-                         <p class="text-sm card-body mt-4">This dual focus is not a coincidence; it is my strategic foundation. My acceptance into the Honors College and the HLLC has provided a unique opportunity to continue the research started on human collaboration through the NSF REU Computational Cognitive Science program at Princeton. This fall, I will be continuing my work from my Rutgers HLLC dorm to the Princeton's Velez CoLab through an independent studies - research study. My goal is to bridge the worlds of academic theory and entrepreneurial application. I aim to create and implement solutions in the tech industry that address significant human challenges, informed by a rigorous understanding of the systems that shape our lives.</p>
-                         <p class="text-sm card-body mt-4">My work at Rutgers will be dedicated to proving that the most powerful innovations are born at this intersection—where a builder's passion for entrepreneurship meets a scholar's dedication to understanding human behavior. My goal is to develop technology that not only solves problems but empowers people to navigate the systems they face every day, transforming the way we connect and collaborate for a better future.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-center">
-                <a href="/blog/" class="btn-ecosystem">Enter My Blog</a>
-            </div>
-        </div>
-    </section>
+  <!-- Currently -->
+  <section class="fade-in py-20 md:py-24 px-6" aria-labelledby="currently-heading">
+    <div class="max-w-6xl mx-auto">
+      <h2 id="currently-heading" class="text-2xl md:text-3xl font-bold text-white mb-10">Currently</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 flex flex-col h-full">
+          <h3 class="card-title text-lg font-bold mb-3">Princeton Research</h3>
+          <p class="card-body text-sm leading-relaxed flex-grow">Investigating how humans balance adaptation and coordination at the Velez CoLab. NSF-funded computational cognitive science.</p>
+        </article>
+        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 flex flex-col h-full">
+          <h3 class="card-title text-lg font-bold mb-3">Student Veteran Org</h3>
+          <p class="card-body text-sm leading-relaxed flex-grow">Founded and leading the Rutgers Newark Student Veteran Organization. Building community for vets transitioning to campus life.</p>
+        </article>
+        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 flex flex-col h-full">
+          <h3 class="card-title text-lg font-bold mb-3">EXOBOUND</h3>
+          <p class="card-body text-sm leading-relaxed mb-4 flex-grow">Exploring the boundaries of human potential through research and experimentation.</p>
+          <a href="/EXOBOUND/" class="card-link text-sm font-semibold mt-auto">Open project →</a>
+        </article>
+        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 flex flex-col h-full">
+          <h3 class="card-title text-lg font-bold mb-3">Writing</h3>
+          <p class="card-body text-sm leading-relaxed mb-4 flex-grow">Thinking out loud about systems, human behavior, and building things that matter.</p>
+          <a href="/blog/" class="card-link text-sm font-semibold mt-auto">Read the blog →</a>
+        </article>
+      </div>
+    </div>
+  </section>
 
-    <!-- Section 3: The Journey (Your Story) -->
-    <section id="journey" class="py-24">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">The Journey</h2>
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-x-12">
-                <!-- Profile Image Column -->
-                <div class="fade-in-up md:col-span-5 mb-12 md:mb-0">
-                    <img src="assets/azael-profile.jpg" 
-                         alt="Azael Montejo Jr. Profile" 
-                         class="rounded-lg shadow-lg object-cover w-full h-full">
-                </div>
-                <!-- Timeline Column -->
-                <div class="md:col-span-7">
-                    <div class="relative timeline-container pt-2">
-                        <!-- Timeline Item 1 -->
-                        <div class="fade-in-up relative pl-10 pb-8">
-                            <div class="timeline-dot"></div>
-                            <h3 class="text-2xl font-bold mb-1">U.S. Navy Veteran</h3>
-                            <p>Learned discipline and critical thinking under pressure as a Pri-Fly operator on the USS Nimitz, forging a foundation of resilience.</p>
-                        </div>
-                        <!-- Timeline Item 2 -->
-                        <div class="fade-in-up relative pl-10 pb-8" style="transition-delay: 100ms;">
-                            <div class="timeline-dot"></div>
-                            <h3 class="text-2xl font-bold mb-1">Entrepreneurial Spirit</h3>
-                            <p>From launching a successful swim school to promoting multi-stage concerts, my drive has always been to build, create, and connect communities.</p>
-                        </div>
-                        <!-- Timeline Item 3 -->
-                        <div class="fade-in-up relative pl-10 pb-8" style="transition-delay: 200ms;">
-                            <div class="timeline-dot"></div>
-                            <h3 class="text-2xl font-bold mb-1">Elite Fitness Coach</h3>
-                            <p>Coached high-performers at Equinox and built a sought-after personal training business specializing in human movement.<br><small class="text-xs">(See archived work on my old, locked account: <a href="https://www.instagram.com/optapp/" target="_blank" rel="noopener noreferrer" class="cosmic-indigo hover:underline">@optapp</a>)</small></p>
-                        </div>
-                        <!-- Timeline Item 4 -->
-                        <div class="fade-in-up relative pl-10" style="transition-delay: 300ms;">
-                            <div class="timeline-dot"></div>
-                            <h3 class="text-2xl font-bold mb-1">Lifelong Athlete</h3>
-                            <p>Foundational discipline forged as a Junior Lifeguard, laying the groundwork for a life of physical and mental resilience.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Social proof -->
+  <section class="fade-in py-10 px-6 border-y border-[#2a2a2a]/50" aria-label="Affiliations">
+    <p class="max-w-4xl mx-auto text-center text-xs sm:text-sm text-[#a0a0a0] leading-relaxed">
+      Princeton <span class="mx-1 sm:mx-2 opacity-60">·</span>
+      Rutgers Honors College <span class="mx-1 sm:mx-2 opacity-60">·</span>
+      NSF <span class="mx-1 sm:mx-2 opacity-60">·</span>
+      U.S. Navy <span class="mx-1 sm:mx-2 opacity-60">·</span>
+      USS Nimitz
+    </p>
+  </section>
 
-    <!-- Section 4: The Insights (Blog Preview) -->
-    <section id="insights" class="py-24">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 card-title">Latest Insights</h2>
-            <div class="fade-in-up flex gap-6 pb-4 overflow-x-auto lg:grid lg:grid-cols-3 lg:gap-8 max-w-6xl mx-auto">
-                 <div class="flex-shrink-0 w-10/12 md:w-1/2 lg:w-full p-6 border border-gray-200 flex flex-col">
-                    <h3 class="text-xl font-bold mb-3 flex-grow card-title">My Thesis is the Bridge: Why I'm Pursuing Both Computer Science and Civil Justice</h3>
-                    <p class="card-body mb-6 flex-grow">When I tell people I'm pursuing both Computer Science and Civil Justice at Rutgers, I often get puzzled looks. "How do those connect?" they ask. The truth is, they're not just connected—they're two sides of the same coin in my mission to understand and build systems that work for people.</p>
-                    <a href="blog/posts/my-thesis-is-the-bridge.html" class="font-bold card-link">Read More &rarr;</a>
-                </div>
-                <div class="flex-shrink-0 w-10/12 md:w-1/2 lg:w-full p-6 border border-gray-200 flex flex-col">
-                    <h3 class="text-xl font-bold mb-3 flex-grow card-title">The Day the Ocean Taught Me What a Hero Really Is</h3>
-                    <p class="card-body mb-6 flex-grow">The air over Will Rogers Beach held the sweet, briny scent of salt and the distant thunder of a hurricane that was a thousand miles away, yet its voice was already a roar in our ears. I was a Junior Lifeguard Cadet, a title that carried the weight of a kingdom in my young hands.</p>
-                    <a href="blog/posts/the-day-the-ocean-taught-me.html" class="font-bold card-link">Read More &rarr;</a>
-                </div>
-                <div class="flex-shrink-0 w-10/12 md:w-1/2 lg:w-full p-6 border border-gray-200 flex flex-col">
-                    <h3 class="text-xl font-bold mb-3 flex-grow card-title">The Day I Collaborated on My Professor's Passion Project</h3>
-                    <p class="card-body mb-6 flex-grow">The Princeton campus, with its hushed Gothic spires and centuries of ingrained intellect, has been my world for nine weeks now. It is a place of wonder, a dream I still navigate with a quiet, almost reverent awe. But within this hallowed ground, the most profound revelations have come not from solitary study, but from the electric current of collaboration.</p>
-                    <a href="blog/posts/professor-passion-project.html" class="font-bold card-link">Read More &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Latest from the blog -->
+  <section class="fade-in py-20 md:py-24 px-6" aria-labelledby="latest-heading">
+    <div class="max-w-6xl mx-auto">
+      <h2 id="latest-heading" class="text-2xl md:text-3xl font-bold text-white mb-10">Latest</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 flex flex-col h-full">
+          <h3 class="card-title text-lg font-bold mb-3">My Thesis is the Bridge: Why I'm Pursuing Both Computer Science and Civil Justice</h3>
+          <p class="card-body text-sm leading-relaxed mb-6 flex-grow">When I tell people I'm pursuing both Computer Science and Civil Justice at Rutgers, I often get puzzled looks.</p>
+          <a href="blog/posts/my-thesis-is-the-bridge.html" class="card-link font-semibold text-sm mt-auto">Read →</a>
+        </article>
+        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 flex flex-col h-full">
+          <h3 class="card-title text-lg font-bold mb-3">The Day the Ocean Taught Me What a Hero Really Is</h3>
+          <p class="card-body text-sm leading-relaxed mb-6 flex-grow">I was a Junior Lifeguard Cadet, a title that carried the weight of a kingdom in my young hands.</p>
+          <a href="blog/posts/the-day-the-ocean-taught-me.html" class="card-link font-semibold text-sm mt-auto">Read →</a>
+        </article>
+        <article class="card rounded-xl p-6 bg-[#1a1a1a] border border-[#2a2a2a] transition duration-300 hover:-translate-y-1 flex flex-col h-full">
+          <h3 class="card-title text-lg font-bold mb-3">The Day I Collaborated on My Professor's Passion Project</h3>
+          <p class="card-body text-sm leading-relaxed mb-6 flex-grow">The most profound revelations have come not from solitary study, but from the electric current of collaboration.</p>
+          <a href="blog/posts/professor-passion-project.html" class="card-link font-semibold text-sm mt-auto">Read →</a>
+        </article>
+      </div>
+    </div>
+  </section>
 
-    <!-- Section 5: The Ecosystem (Call to Action) -->
-    <footer id="ecosystem" class="py-24 text-center">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">Want to know more?</h2>
-            <p class="max-w-xl mx-auto mb-12 text-lg">If you have any questions, find me on social media and let's chat!</p>
-            
-            <div class="flex justify-center items-center space-x-8 mb-16">
-                <a href="https://www.linkedin.com/in/azaelmontejojr/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:cosmic-indigo transition-colors" aria-label="LinkedIn"><i class="fab fa-linkedin fa-3x"></i></a>
-                <a href="https://www.instagram.com/martelesoma/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:cosmic-indigo transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-3x"></i></a>
-                <a href="https://www.trainerize.me/profile/onlinepersonaltrainingapp/Azael.MontejoJr/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:cosmic-indigo transition-colors" aria-label="Trainerize"><i class="fas fa-dumbbell fa-3x"></i></a>
-            </div>
+  <!-- Stay connected -->
+  <section class="fade-in py-20 md:py-24 px-6 pb-28" aria-labelledby="stay-heading">
+    <div class="max-w-md mx-auto text-center">
+      <h2 id="stay-heading" class="text-2xl md:text-3xl font-bold text-white mb-8">Stay in the loop</h2>
+      <form class="flex flex-col sm:flex-row gap-3" onsubmit="return false;">
+        <label for="email-signup" class="sr-only">Email</label>
+        <input id="email-signup" type="email" name="email" placeholder="you@email.com" autocomplete="email" class="flex-1 rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-3 text-[#f0f0f0] placeholder:text-[#666] focus:outline-none focus:ring-2 focus:ring-[#ff7f0e]/50">
+        <button type="button" class="rounded-lg bg-[#4F00BC] px-6 py-3 font-semibold text-white transition hover:brightness-110">Subscribe</button>
+      </form>
+      <p class="mt-4 text-sm text-[#a0a0a0]">Occasional updates on research, projects, and ideas. No spam.</p>
+    </div>
+  </section>
 
-            <div class="max-w-3xl mx-auto border-t border-gray-200 pt-8">
-                 <h3 class="text-2xl font-bold mb-2">AMJ Coaching</h3>
-                 <p class="mb-6">Ready to start your transformation? Let's connect and build your personalized fitness journey.</p>
-                 <a href="/connect" class="btn-ecosystem">Connect</a>
-            </div>
+  <div id="footer-container"></div>
 
-            <p class="mt-20 text-sm">&copy; 2025 Azael Montejo Jr. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Add audio for welcome sound -->
-    <audio id="welcome-audio" src="assets/welcome.mp3" preload="auto"></audio>
-
-    <script>
-        function toggleProjectDetails(projectId) {
-            const detailsDiv = document.getElementById(projectId);
-            if (detailsDiv.style.maxHeight && detailsDiv.style.maxHeight !== '0px') {
-                detailsDiv.style.maxHeight = '0px';
-                detailsDiv.style.marginTop = '0px';
-            } else {
-                detailsDiv.style.maxHeight = detailsDiv.scrollHeight + 'px';
-                detailsDiv.style.marginTop = '1rem';
-            }
-        }
-
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                const offsetTop = section.offsetTop - 80; // Account for fixed navigation
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-        }
-
-        function enterEcosystem() {
-            // Show all hidden sections with animation
-            const sections = document.querySelectorAll('section:not(#hero), footer');
-            sections.forEach((section, index) => {
-                setTimeout(() => {
-                    section.style.display = 'block';
-                    section.style.opacity = '0';
-                    section.style.visibility = 'visible';
-                    section.style.transform = 'translateY(20px)';
-                    section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-                    
-                    // Trigger animation
-                    setTimeout(() => {
-                        section.style.opacity = '1';
-                        section.style.transform = 'translateY(0)';
-                    }, 50);
-                }, index * 200);
-            });
-            
-            // Make fade-in-up elements visible
-            setTimeout(() => {
-                const fadeElements = document.querySelectorAll('.fade-in-up');
-                fadeElements.forEach(element => {
-                    element.classList.add('visible');
-                });
-            }, 300);
-            
-            // Scroll to pillars section after animation starts
-            setTimeout(() => {
-                scrollToSection('pillars');
-            }, 800);
-        }
-
-        // Enhance Enter The Ecosystem button with sound and jump effect
-        function playWelcomeSoundAndJump(btn) {
-            const audio = document.getElementById('welcome-audio');
-            if (audio) {
-                audio.currentTime = 0;
-                audio.play().catch(e => console.log('Audio play failed:', e));
-            }
-            btn.classList.remove('jump');
-            void btn.offsetWidth; // trigger reflow for animation
-            btn.classList.add('jump');
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Enhance hero section button
-            var heroBtn = document.querySelector('a.btn-ecosystem[href="#pillars"]');
-            if (heroBtn) {
-                heroBtn.addEventListener('click', function(e) {
-                    playWelcomeSoundAndJump(heroBtn);
-                });
-            }
-            
-            // Enhance other ecosystem buttons
-            var ecosystemBtns = document.querySelectorAll('.btn-ecosystem');
-            ecosystemBtns.forEach(btn => {
-                if (btn !== heroBtn) {
-                    btn.addEventListener('click', function(e) {
-                        playWelcomeSoundAndJump(btn);
-                    });
-                }
-            });
-        });
-    </script>
-    <script src="./scripts/main.js" type="module"></script>
+  <script>
+    (function () {
+      var nodes = document.querySelectorAll('.fade-in');
+      if (!nodes.length || !('IntersectionObserver' in window)) {
+        nodes.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target);
+          });
+        },
+        { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
+      );
+      nodes.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+  <script src="/scripts/components.js"></script>
 </body>
 </html>

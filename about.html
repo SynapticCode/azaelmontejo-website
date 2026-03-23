@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Azael Montejo Jr.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .about-page-timeline.timeline-container::before {
+      background-color: #2a2a2a;
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <div id="navbar-container"></div>
+
+  <main>
+    <!-- Section 1: Hero -->
+    <section class="pt-32 pb-16 md:pb-24">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <h1 class="text-4xl md:text-5xl font-bold mb-10 md:mb-12">About</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
+          <div class="w-full">
+            <img src="assets/azael-profile.jpg"
+                 alt="Azael Montejo Jr."
+                 class="rounded-2xl shadow-lg object-cover w-full max-h-[420px] md:max-h-[480px]">
+          </div>
+          <div class="text-lg md:text-xl text-slate-600 leading-relaxed space-y-0">
+            <p>I'm Azael Montejo Jr. — a computer science student at Rutgers Honors College, researcher at Princeton, Navy veteran, and builder of communities and projects. I move between worlds: academia, tech, fitness, creative ventures, and veteran advocacy. I'm interested in how people coordinate, adapt, and build things together.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: The Journey -->
+    <section class="py-16 md:py-24">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16">The Journey</h2>
+        <div class="relative timeline-container about-page-timeline pt-2 max-w-3xl mx-auto">
+          <div class="fade-in relative pl-10 pb-8">
+            <div class="timeline-dot"></div>
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Junior Lifeguard</h3>
+            <p class="text-slate-600">Started in the water young. Foundational discipline forged at the beach.</p>
+          </div>
+          <div class="fade-in relative pl-10 pb-8">
+            <div class="timeline-dot"></div>
+            <h3 class="text-xl md:text-2xl font-bold mb-2">U.S. Navy</h3>
+            <p class="text-slate-600">Pri-Fly operator on the USS Nimitz. Learned to perform under pressure and lead in chaos.</p>
+          </div>
+          <div class="fade-in relative pl-10 pb-8">
+            <div class="timeline-dot"></div>
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Entrepreneur</h3>
+            <p class="text-slate-600">Built Swim Technique Academy from scratch, coaching over a hundred families. Promoted concerts. Always building.</p>
+          </div>
+          <div class="fade-in relative pl-10 pb-8">
+            <div class="timeline-dot"></div>
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Fitness Coach</h3>
+            <p class="text-slate-600">Trained high-performers at Equinox. Built a personal training business rooted in human movement.</p>
+          </div>
+          <div class="fade-in relative pl-10 pb-8">
+            <div class="timeline-dot"></div>
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Princeton Researcher</h3>
+            <p class="text-slate-600">NSF REU at the Velez CoLab. Computational cognitive science — studying how humans balance adaptation and coordination in teams.</p>
+          </div>
+          <div class="fade-in relative pl-10 pb-8">
+            <div class="timeline-dot"></div>
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Rutgers Honors College</h3>
+            <p class="text-slate-600">Computer Science + Civil Justice. Currently. Building the foundation for what's next.</p>
+          </div>
+          <div class="fade-in relative pl-10 pb-0">
+            <div class="timeline-dot"></div>
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Student Veteran Org</h3>
+            <p class="text-slate-600">Founded and serve as president of the Rutgers Newark Student Veteran Organization. Community for those who served.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: What Drives Me -->
+    <section class="py-16 md:py-24 border-t border-gray-200/20">
+      <div class="container mx-auto px-6 max-w-3xl">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-12">What Drives Me</h2>
+        <div class="space-y-6 text-lg text-slate-600 leading-relaxed">
+          <p>I'm drawn to the intersection of systems and people. Whether it's a research lab, a veteran org, or a side project — I'm always asking the same question: how do we build things that actually work for humans?</p>
+          <p>Outside of school and research, I run a creative brand at the intersection of anime culture and nightlife. I read constantly, train consistently, and say yes to things that scare me a little.</p>
+          <p>I'm not chasing a single path. I'm building a portfolio of experiences, skills, and relationships. The throughline is curiosity.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Connect CTA -->
+    <section class="py-16 md:py-24">
+      <div class="container mx-auto px-6 text-center max-w-2xl">
+        <h2 class="text-2xl md:text-3xl font-bold mb-8">Want to connect?</h2>
+        <a href="/connect/" class="btn-ecosystem inline-block">Let's talk &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var fadeElements = document.querySelectorAll('.fade-in');
+      if (!fadeElements.length || !('IntersectionObserver' in window)) {
+        fadeElements.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        });
+      }, { root: null, rootMargin: '0px 0px -40px 0px', threshold: 0.08 });
+      fadeElements.forEach(function (el) { observer.observe(el); });
+    });
+  </script>
+  <script src="/scripts/components.js"></script>
+</body>
+</html>
